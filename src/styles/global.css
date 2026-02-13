@@ -1,12 +1,19 @@
+@import "tailwindcss";
+
 /*
   The CSS in this style tag is based off of Bear Blog's default CSS.
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
+	--primary: #072957;
+	--primary-light: #4A90E2;
+
+	--primary-foreground: #fff;
+
+	--accent: #C9B27C;
+	--accent-dark: #9F8653;
+
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
@@ -15,6 +22,19 @@
 	--box-shadow:
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
 		rgba(var(--gray), 33%);
+}
+
+@theme {
+	--color-primary: var(--primary);
+	--color-primary-light: var(--primary-light);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-dark: var(--accent-dark);
+	--color-black: rgb(var(--black));
+	--color-gray: rgb(var(--gray));
+	--color-gray-light: rgb(var(--gray-light));
+	--color-gray-dark: rgb(var(--gray-dark));
+	--shadow-elevated: var(--box-shadow);
 }
 @font-face {
 	font-family: "Atkinson";
