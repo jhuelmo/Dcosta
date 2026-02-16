@@ -1,0 +1,15 @@
+---
+import Footer from "@/components/Footer.astro";
+import Head from "@/components/Head.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+
+---
+<!doctype html>
+<html lang="en">
+    <!-- TODO: Modify head -->
+	<Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<body>
+        <slot />
+	</body>
+</html>

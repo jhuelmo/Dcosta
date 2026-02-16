@@ -1,20 +1,12 @@
 ---
-import Head from '../components/Head.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Hero from '@/components/Hero.astro';
+import Layout from '@/layouts/layout.astro';
+import Main from '@/layouts/main.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>D'acosta Labs</h1>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout>
+	<Main>
+		<Hero />
+		<Hero />
+	</Main>
+</Layout>
