@@ -1,51 +1,53 @@
 @import "tailwindcss";
 
 @theme {
-	/* COLORS */
-	--color-primary: #072957;
-	--color-primary-light: #4A90E2;
-	--color-primary-foreground: #fff;
+    /* COLORS */
+    --color-primary: #072957;
+    --color-primary-light: #4a90e2;
+    --color-primary-foreground: #fff;
 
-	--color-accent: #C9B27C;
-	--color-accent-dark: #9F8653;
-	--color-accent-foreground: #fff;
+    --color-accent: #c9b27c;
+    --color-accent-dark: #9f8653;
+    --color-accent-foreground: #fff;
 
-	--color-neutral: #FBFBFB;
-	--color-neutral-foreground: #2D4453;
-	--color-neutral-dark: #22333E;
-	--color-neutral-dark-foreground: #fff;
+    --color-neutral: #fbfbfb;
+    --color-neutral-foreground: #2d4453;
+    --color-neutral-dark: #22333e;
+    --color-neutral-dark-foreground: #fff;
 
-	--color-textColor: #2D4453;
+    --color-textColor: #2d4453;
 
-	--gray-gradient: rgba(229, 233, 240, 0.5), #fff;
-	--shadow-elevated: 0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33), 0 16px 32px rgba(96, 115, 159, 0.33);
+    --gray-gradient: rgba(229, 233, 240, 0.5), #fff;
+    --shadow-elevated:
+        0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33),
+        0 16px 32px rgba(96, 115, 159, 0.33);
 
-	/* SIZES AND MARGINS */
-	--page-max-width: 1440px;
+    /* SIZES AND MARGINS */
+    --page-max-width: 1440px;
 
-	/* TYPOGRAPHY */
-	--font-headings: "Comfortaa", cursive;
-	--font-body: "Raleway", sans-serif;
+    /* TYPOGRAPHY */
+    --font-headings: "Comfortaa", cursive;
+    --font-body: "Raleway", sans-serif;
 }
 
 body {
-	font-family: "Raleway", sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: var(--color-textColor);
-	font-size: 20px;
-	line-height: 1.7;
+    font-family: "Raleway", sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    background: linear-gradient(var(--gray-gradient)) no-repeat;
+    background-size: 100% 600px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: var(--color-textColor);
+    font-size: 20px;
+    line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 3em 1em;
 }
 h1,
 h2,
@@ -53,51 +55,44 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "Comfortaa", sans-serif;
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
+    font-family: "Comfortaa", sans-serif;
+    line-height: 1.2;
 }
 strong,
 b {
-	font-weight: 700;
+    font-weight: 700;
 }
 img {
-	max-width: 100%;
-	height: auto;
+    max-width: 100%;
+    height: auto;
 }
 @media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+    body {
+        font-size: 18px;
+    }
+    main {
+        padding: 1em;
+    }
 }
 
-@layer components{
-	.container-lg{
-		@apply max-w-6xl mx-auto;
-	}
+@layer components {
+    .container-lg {
+        @apply max-w-6xl mx-auto;
+    }
 
-	.section{
-		@apply py-16;
-	}
+    .section {
+        @apply py-16;
+    }
 
-	.footer{
-		@apply py-16 border-1 border-t border-gray-200;
-	}
+    .footer {
+        @apply py-16 border-1 border-t border-gray-200;
+    }
+
+    .letter-spacing-animation {
+        transition: letter-spacing 0.3s ease-in-out;
+    }
+
+    .letter-spacing-animation:hover {
+        letter-spacing: 2px;
+    }
 }
