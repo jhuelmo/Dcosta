@@ -92,6 +92,10 @@ img {
 		@apply max-w-6xl mx-auto;
 	}
 
+	.section{
+		@apply py-16;
+	}
+
 	.footer{
 		@apply py-16 border-1 border-t border-gray-200;
 	}
