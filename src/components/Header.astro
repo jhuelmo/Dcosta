@@ -2,11 +2,12 @@
 import HeaderLink from './HeaderLink.astro';
 import { Button } from "@/components/ui/button"
 import logoUrl from "../assets/logo-placeholder.png"
+import { Image } from 'astro:assets';
 ---
 
 <header class="header fixed left-1/2 top-8 z-999 flex h-16 w-300 -translate-x-1/2 items-center justify-between rounded-full bg-neutral p-2">
 	<a class="logo ml-2 h-auto w-32" href="/">
-		<img class="h-auto w-32 object-cover" src={logoUrl.src} alt="Logo" />
+		<Image class="h-auto w-32 object-cover" src={logoUrl} alt="Logo" />
 	</a>
 	<nav class="flex flex-row items-center gap-6">
 		<HeaderLink class="text-base letter-spacing-animation" href="/">Home</HeaderLink>
