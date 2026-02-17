@@ -1,35 +1,79 @@
 ---
+import { Button } from "./ui/button";
+
 const today = new Date();
 ---
 
-<footer>
-	&copy; {today.getFullYear()} Your name here. All rights reserved.
-	<div class="social-links">
-		<a href="https://m.webtoo.ls/@astro" target="_blank">
-			<span class="sr-only">Follow Astro on Mastodon</span>
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram-icon lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-		</a>
-
+<footer class="footer">
+	<div class="container-lg flex flex-col gap-18">
+		<div class="flex justify-between">
+			<div class="max-w-md">
+				<div>
+					<p class="text-lg font-bold font-body tracking-tighter">D'ACOSTA LABORATORIO DENTAL</p>
+					<p class="text-lg mt-2">En toda barcelona. Servicio premuium garantizado.</p>
+				</div>
+			</div>
+			<div>
+				<ul class="flex gap-8">
+					<li class="flex items-start">
+						<a href="/about" class="text-sm font-semibold font-headings tracking-tighter">
+							SOBRE NOSOTROS
+						</a>
+					</li>
+					<li class="flex items-start">
+						<a href="/legal" class="text-sm font-semibold font-headings tracking-tighter">
+							AVISO LEGAL
+						</a>
+					</li>
+					<li class="flex items-start">
+						<a href="/contact" class="text-sm font-semibold font-headings tracking-tighter">
+							CONTACTO
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<div class="flex justify-between">
+			<div class="max-w-2xl">
+				<div>
+					<p class="text-5xl font-bold font-body tracking-tighter">
+						MANTENTE INFORMADO
+					</p>
+				</div>
+				<div class="mt-2 max-w-md">
+					<p class="text-lg font-body tracking-wide">
+						Suscríbete a nuestro boletín para mantenerte al día con innovaciones, formaciones y novedades del laboratorio.
+					</p>
+				</div>
+			</div>
+			<div class="flex gap-4">
+				<div>
+					<input type="email" placeholder="Introduce tu correo electrónico" class="w-xs  rounded-full border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+				</div>
+				<div>
+					<Button size="lg">Suscribirse</Button>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-between">
+			<div>
+				<p class="text-sm">
+					© {today.getFullYear()} D'ACOSTA LABORATORIO DENTAL. All rights reserved.
+				</p>
+				<ul>
+					<li>Aviso legal</li>
+					<li>Política de privacidad</li>
+				</ul>
+			</div>
+			<div class="flex gap-4">
+				<div>
+					<ul>
+						<li>Aviso legal</li>
+						<li>Política de privacidad</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: var(--color-gray);
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: var(--color-gray);
-	}
-	.social-links a:hover {
-		color: var(--color-gray-dark);
-	}
-</style>
