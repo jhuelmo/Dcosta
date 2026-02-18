@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "motion/react";
 
 const Triad = () => {

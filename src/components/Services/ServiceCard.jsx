@@ -16,14 +16,14 @@ const ServiceCard = ({ service }) => {
       transition={{ duration: 0.6 }}
     >
       <motion.div
-        className="absolute inset-0 bg-primary"
+        className="absolute inset-0 bg-primary rounded-3xl"
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.4 }}
       />
 
       {/* Image on hover */}
       <motion.div
-        className="absolute right-10 top-[-10%]  rotate-20 aspect-square z-100 w-85 rounded-xl overflow-hidden"
+        className="absolute right-10 top-[-10%]  rotate-20 aspect-square z-100 w-85 rounded-3xl overflow-hidden"
         animate={{ 
           opacity: isHovered ? 1 : 0,
           x: isHovered ? 25 : -25,
@@ -33,7 +33,7 @@ const ServiceCard = ({ service }) => {
         <img 
           src={service.image} 
           alt={service.title}
-          className="h-full object-cover"
+          className="h-full w-full object-cover"
         />
       </motion.div>
 
@@ -68,7 +68,7 @@ const ServiceCard = ({ service }) => {
           <div className="space-y-3 max-w-md">
             {/* Description */}
             <motion.p 
-                className="text-md"
+              className="text-md overflow-hidden [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]"
                 animate={{ 
                 color: isHovered ? '#e5e5e5' : '#2d4453'
                 }}
