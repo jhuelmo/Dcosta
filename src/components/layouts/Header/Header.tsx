@@ -93,10 +93,11 @@ export function Header() {
             </motion.nav>
             <motion.div variants={variants}>
                 <Button
+                    asChild
                     className="cursor-pointer letter-spacing-animation"
                     size="lg"
                 >
-                    Concreta una cita
+                    <a href="/contact">Concreta una cita</a>
                 </Button>
             </motion.div>
         </motion.header>
