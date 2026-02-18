@@ -12,7 +12,7 @@ export const services = [
       'Propiedad numero 2',
       'Propiedad numero 3'
     ],
-    image: serviceImage1
+    image: serviceImage1.src
   },
   {
     id: '02',
@@ -23,7 +23,7 @@ export const services = [
       'Propiedad numero 2',
       'Propiedad numero 3'
     ],
-    image: serviceImage2
+    image: serviceImage2.src
   },
   {
     id: '03',
@@ -34,6 +34,6 @@ export const services = [
       'Propiedad numero 2',
       'Propiedad numero 3'
     ],
-    image: serviceImage3
+    image: serviceImage3.src
   }
 ];
