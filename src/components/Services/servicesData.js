@@ -1,3 +1,7 @@
+import serviceImage1 from '../../assets/Services/Service-1.jpg';
+import serviceImage2 from '../../assets/Services/Service-2.jpg';
+import serviceImage3 from '../../assets/Services/Service-3.jpg';
+
 export const services = [
   {
     id: '01',
@@ -8,7 +12,7 @@ export const services = [
       'Propiedad numero 2',
       'Propiedad numero 3'
     ],
-    image: '/src/assets/Services/service-1.jpg'
+    image: serviceImage1.src
   },
   {
     id: '02',
@@ -19,7 +23,7 @@ export const services = [
       'Propiedad numero 2',
       'Propiedad numero 3'
     ],
-    image: '/src/assets/Services/service-2.jpg'
+    image: serviceImage2.src
   },
   {
     id: '03',
@@ -30,6 +34,6 @@ export const services = [
       'Propiedad numero 2',
       'Propiedad numero 3'
     ],
-    image: '/src/assets/Services/service-3.jpg'
+    image: serviceImage3.src
   }
 ];

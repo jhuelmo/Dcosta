@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Check } from 'lucide-react';
+import { Image } from 'astro:assets';
 
 const ServiceCard = ({ service }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -30,7 +31,7 @@ const ServiceCard = ({ service }) => {
         }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
-        <img 
+        <Image 
           src={service.image} 
           alt={service.title}
           className="h-full w-full object-cover"
