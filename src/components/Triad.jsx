@@ -31,9 +31,9 @@ const Triad = () => {
                         filter
                     }}
                 >
-                    <h1 className="text-center w-2xl font-bold font-body! tracking-tighter text-9xl scale-150 leading-none">
+                    <h2 className="text-center leading-25 w-2xl font-bold font-body! tracking-tighter text-9xl scale-150">
                         Innovación para tu sonrisa
-                    </h1>
+                    </h2>
                 </motion.div>
             </div>
         </section>
