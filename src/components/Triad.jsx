@@ -1,34 +1,38 @@
 import { useEffect, useRef } from "react";
-import { motion, useInView, useScroll } from "motion/react";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "motion/react";
 
 const Triad = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { amount: 0.5 });
+    const isInView = useInView(ref, { amount: 0.9 });
 
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"], // empieza cuando entra, termina cuando sale
-    });
+    const { scrollY } = useScroll();
 
-    useEffect(() => {
-        console.log("scrollYProgress:", scrollYProgress);
-    }, [scrollYProgress]);
+    // Transformar el scroll de 500px a 900px a valores de animación
+    const scale = useTransform(scrollY, [650, 1200], [1, 0.5]);
+    const y = useTransform(scrollY, [650, 1200], [250, -150]);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        console.log("Scroll Y: ", latest)
+    })
 
     return (
         <section
             ref={ref}
-            className=" bg-white w-screen h-screen flex items-center justify-center overflow-hidden"
+            className="sticky top-0 bg-white w-screen h-[200vh] overflow-hidden"
         >
-            <motion.div
+            <div className="h-full top-0 flex">
+                <motion.div
                 className="container-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
+                style={{ 
+                    scale,
+                    y
+                }}
             >
                 <h1 className="text-center w-2xl font-bold font-body! tracking-tighter text-9xl scale-150 leading-none">
                     Innovación para tu sonrisa
                 </h1>
             </motion.div>
+            </div>
         </section>
     );
 };
