@@ -1,11 +1,12 @@
 ---
 import { Button } from "./ui/button";
-
+import { Image } from "astro:assets";
+import hero from "src/assets/hero-placeholder.png";
 ---
 
 <div class="h-[100vh] flex-col items-center justify-center p-4 text-center">
     <div class="img-wrapper relative w-full h-full rounded-3xl overflow-hidden">
-        <img class=" object-contain" src="src/assets/hero-placeholder.png" alt="D'acosta labs" loading="lazy" />
+        <Image class=" object-contain" src={hero} alt="D'acosta labs" loading="lazy" />
     </div>
     <div class="absolute flex flex-col items-start left-0 bottom-0 pl-24 py-20 z-100 max-w-[60%] gap-4">
         <h1 class="text-neutral text-left text-8xl">D'acosta Labs</h1>
