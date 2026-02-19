@@ -39,7 +39,7 @@ const Triad = () => {
     return (
         <section
             ref={ref}
-            className="bg-white w-screen h-[200vh] overflow-hidden"
+            className="bg-white w-screen h-[230vh] overflow-hidden"
         >
             <div className="top-0 flex h-[200vh]">
                 <motion.div className="container-lg sticky top-0">
