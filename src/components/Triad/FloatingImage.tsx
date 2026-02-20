@@ -10,6 +10,7 @@ interface Props {
     startPoint?: { x: number; y: number };
     scrollY: MotionValue<number>;
     className?: string;
+    offset?: { x: number; y: number };
 }
 
 export const FloatingImage = ({
@@ -17,6 +18,7 @@ export const FloatingImage = ({
     startPoint = { x: 0, y: 0 },
     scrollY,
     className,
+    offset = { x: 0, y: 0 },
 }: Props) => {
     const [viewportDims, setViewportDims] = useState({
         width: typeof window !== "undefined" ? window.innerWidth : 0,
@@ -45,19 +47,25 @@ export const FloatingImage = ({
         y: (startPoint.y / 100) * viewportDims.height,
     };
 
-    const progress = useTransform(scrollY, [950, 1900], [0, 1]);
+    const progress = useTransform(
+        scrollY,
+        [900, 1750, 1900, 2350],
+        [0, 0.7, 0.9, 1],
+    );
 
     const finalX = useTransform(
         [progress, anchorX],
         ([p, ax]) =>
             normalizedStartPoint.x +
-            (p as number) * ((ax as number) - normalizedStartPoint.x),
+            (p as number) *
+                ((ax as number) + offset.x - normalizedStartPoint.x),
     );
     const finalY = useTransform(
         [progress, anchorY],
         ([p, ay]) =>
             normalizedStartPoint.y +
-            (p as number) * ((ay as number) - normalizedStartPoint.y),
+            (p as number) *
+                ((ay as number) + offset.y - normalizedStartPoint.y),
     );
 
     return (
