@@ -15,11 +15,13 @@ const Triad = () => {
 
     const { scrollY } = useScroll();
 
-    // Transformar el scroll de 500px a 900px a valores de animación
-    const scale = useTransform(scrollY, [700, 1300, 3300], [1, 0.9, 0.01]);
-    const y = useTransform(scrollY, [700, 1300, 3300], [120, 500, 1800]);
-    const blur = useTransform(scrollY, [700, 1200, 2000, 3300], [0, 0, 0, 350]);
-    const filter = useTransform(blur, (value) => `blur(${value}px)`);
+    // // Transformar el scroll de 500px a 900px a valores de animación
+    const scale = useTransform(scrollY, [700, 2300], [2, 0.01]);
+    const marginBottom = useTransform(
+        scrollY,
+        [1600, 1800, 1900, 2000],
+        ["0vh", "-10vh", "-50vh", "-108vh"],
+    );
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         console.log("Scroll Y: ", latest);
@@ -37,27 +39,52 @@ const Triad = () => {
     });
 
     return (
-        <section
-            ref={ref}
-            className="bg-white w-screen h-[230vh] overflow-hidden"
-        >
-            <div className="top-0 flex h-[200vh]">
-                <motion.div className="container-lg sticky top-0">
-                    <motion.h2
-                        ref={h2Ref}
-                        className="text-center leading-25 w-2xl font-bold font-body! tracking-tighter text-9xl scale-150"
-                        style={{
-                            scale,
-                            y,
-                            filter,
-                        }}
-                    >
-                        Innovación para tu sonrisa
-                    </motion.h2>
-                </motion.div>
+        <section ref={ref} className="block bg-white">
+            <motion.header
+                className="relative h-[180vh]"
+                style={{ marginBottom }}
+            >
+                <div className="sticky h-screen top-0">
+                    <div className="h-full flex justify-center items-center text-center overflow-hidden">
+                        <motion.h2
+                            ref={h2Ref}
+                            className="relative leading-25 font-medium font-body! tracking-tighter text-9xl max-w-3xl"
+                            style={{
+                                scale,
+                            }}
+                        >
+                            Innovación para tu sonrisa
+                        </motion.h2>
+                    </div>
+                </div>
                 <FloatingImage
-                    anchorX={anchorX}
-                    anchorY={anchorY}
+                    className="w-52 h-52"
+                    anchor={{ anchorX, anchorY }}
+                    startPoint={{ x: -9, y: 50 }}
+                    scrollY={scrollY}
+                />
+                <FloatingImage
+                    className="w-52 h-40"
+                    anchor={{ anchorX, anchorY }}
+                    startPoint={{ x: 12, y: -39 }}
+                    scrollY={scrollY}
+                />
+                <FloatingImage
+                    className="w-55 h-58"
+                    anchor={{ anchorX, anchorY }}
+                    startPoint={{ x: 90, y: -17 }}
+                    scrollY={scrollY}
+                />
+                <FloatingImage
+                    className="w-60 h-60"
+                    anchor={{ anchorX, anchorY }}
+                    startPoint={{ x: 17, y: 119 }}
+                    scrollY={scrollY}
+                />
+                <FloatingImage
+                    className="w-55 h-55"
+                    anchor={{ anchorX, anchorY }}
+                    startPoint={{ x: 109, y: 80 }}
                     scrollY={scrollY}
                 />
                 <motion.div
@@ -69,7 +96,7 @@ const Triad = () => {
                         translateY: "-50%",
                     }}
                 />
-            </div>
+            </motion.header>
         </section>
     );
 };

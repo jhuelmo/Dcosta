@@ -1,35 +1,64 @@
-import {
-    motion,
-    MotionValue,
-    useMotionValueEvent,
-    useTransform,
-} from "motion/react";
+import { motion, MotionValue, useTransform } from "motion/react";
+import { useState, useEffect } from "react";
 import Triad1 from "../../assets/Services/Service-1.jpg";
 
 interface Props {
-    anchorX: MotionValue<number>;
-    anchorY: MotionValue<number>;
+    anchor: {
+        anchorX: MotionValue<number>;
+        anchorY: MotionValue<number>;
+    };
+    startPoint?: { x: number; y: number };
     scrollY: MotionValue<number>;
+    className?: string;
 }
 
-export const FloatingImage = ({ anchorX, anchorY, scrollY }: Props) => {
-    const progress = useTransform(scrollY, [700, 2300], [0, 1]);
+export const FloatingImage = ({
+    anchor: { anchorX, anchorY },
+    startPoint = { x: 0, y: 0 },
+    scrollY,
+    className,
+}: Props) => {
+    const [viewportDims, setViewportDims] = useState({
+        width: typeof window !== "undefined" ? window.innerWidth : 0,
+        height: typeof window !== "undefined" ? window.innerHeight : 0,
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setViewportDims({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        };
+
+        setViewportDims({
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const normalizedStartPoint = {
+        x: (startPoint.x / 100) * viewportDims.width,
+        y: (startPoint.y / 100) * viewportDims.height,
+    };
+
+    const progress = useTransform(scrollY, [950, 1900], [0, 1]);
+
     const finalX = useTransform(
         [progress, anchorX],
-        ([p, ax]) => (p as number) * (ax as number),
+        ([p, ax]) =>
+            normalizedStartPoint.x +
+            (p as number) * ((ax as number) - normalizedStartPoint.x),
     );
     const finalY = useTransform(
         [progress, anchorY],
-        ([p, ay]) => (p as number) * (ay as number),
+        ([p, ay]) =>
+            normalizedStartPoint.y +
+            (p as number) * ((ay as number) - normalizedStartPoint.y),
     );
-    const left = useTransform(scrollY, [0, 1300], [-500, 1]);
-    const top = useTransform(scrollY, [0, 2300], [300, 1]);
-
-    const scale = useTransform(scrollY, [700, 1000], [0.8, 0.7]);
-
-    useMotionValueEvent(anchorX, "change", (v) => console.log("anchorX:", v));
-    useMotionValueEvent(anchorY, "change", (v) => console.log("anchorY:", v));
-    useMotionValueEvent(progress, "change", (v) => console.log("progress:", v));
 
     return (
         <motion.div
@@ -37,14 +66,11 @@ export const FloatingImage = ({ anchorX, anchorY, scrollY }: Props) => {
             style={{
                 x: finalX,
                 y: finalY,
-                left: left,
-                top: top,
-                scale: scale,
                 translateX: "-50%",
                 translateY: "-50%",
             }}
         >
-            <div className="w-96 h-96 rounded-3xl overflow-hidden">
+            <div className={`${className} rounded-3xl overflow-hidden`}>
                 <img
                     src={Triad1.src}
                     alt="Triad"
