@@ -2,8 +2,9 @@
 import { Footer } from "@/components/layouts/Footer/Footer";
 import { Header } from "@/components/layouts/Header/Header";
 
+const headerVariant = Astro.props.headerVariant || "default";
 ---
 
-<Header client:load />
-<slot />
+<Header client:load variant={headerVariant} />
+    <slot />
 <Footer />

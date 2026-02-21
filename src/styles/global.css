@@ -30,8 +30,19 @@
     --font-body: "Raleway", sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+    min-width: 0;
+}
+
 html {
-    overflow-x: hidden;
+    overflow-x: clip;
+}
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
 }
 
 html.lenis,
@@ -60,8 +71,6 @@ body {
     margin: 0;
     padding: 0;
     text-align: left;
-    background: linear-gradient(var(--gray-gradient)) no-repeat;
-    background-size: 100% 600px;
     word-wrap: break-word;
     overflow-wrap: break-word;
     color: var(--color-textColor);
