@@ -10,6 +10,7 @@ import {
 import { FloatingImage } from "./FloatingImage";
 import { TriadElement } from "./TriadElement";
 import { TriadIntro } from "./TriadIntro";
+import { StickyBlock } from "../ui/stickyBlock";
 
 const Triad = () => {
     const ref = useRef(null);
@@ -36,7 +37,7 @@ const Triad = () => {
 
             {/* 2800 appear */}
             <main className="relative h-[220vh] ">
-                <div className="sticky h-screen top-0 pt-[35vh]">
+                <StickyBlock className="pt-[35vh]">
                     <ul className="flex flex-col gap-5 items-center text-white">
                         <TriadElement
                             className="font-light z-100"
@@ -61,11 +62,13 @@ const Triad = () => {
                             Capacidad resolutiva
                         </TriadElement>
                         <motion.div
-                            className="fixed w-screen h-screen z-90 bg-primary"
+                            className="fixed w-screen h-screen z-90 p-4  overflow-hidden"
                             style={{ top: top }}
-                        />
+                        >
+                            <div className="bg-primary rounded-3xl w-full h-full"></div>
+                        </motion.div>
                     </ul>
-                </div>
+                </StickyBlock>
             </main>
         </section>
     );

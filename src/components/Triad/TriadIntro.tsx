@@ -7,6 +7,7 @@ import {
 } from "motion/react";
 import { FloatingImage } from "./FloatingImage";
 import { useRef } from "react";
+import { StickyBlock } from "../ui/stickyBlock";
 
 interface TriadIntroProps {
     scrollY: MotionValue<number>;
@@ -55,7 +56,7 @@ export const TriadIntro = ({ scrollY }: TriadIntroProps) => {
 
     return (
         <header className="relative h-[200vh] mb-[-40vh]">
-            <div className="sticky h-screen top-0">
+            <StickyBlock>
                 <div className="h-full flex justify-center items-center text-center overflow-hidden">
                     <motion.h2
                         ref={h2Ref}
@@ -64,10 +65,10 @@ export const TriadIntro = ({ scrollY }: TriadIntroProps) => {
                             scale,
                         }}
                     >
-                        Innovación para tu sonrisa
+                        Calidad que sonríe
                     </motion.h2>
                 </div>
-            </div>
+            </StickyBlock>
             {floatingImages.map((image, index) => (
                 <FloatingImage
                     key={`floating-image-${index}`}

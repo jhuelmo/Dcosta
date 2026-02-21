@@ -1,7 +1,8 @@
 ---
 import Hero from '@/components/Hero.astro';
 import Services from '@/components/Services';
-import Triad from '@/components/Triad/Triad.jsx';
+import Triad from '@/components/Triad/Triad.js';
+import Works from '@/components/Works';
 import Layout from '@/layouts/layout.astro';
 import Main from '@/layouts/main.astro';
 ---
@@ -10,7 +11,7 @@ import Main from '@/layouts/main.astro';
 	<Main>
 		<Hero />
 		<Triad client:load />
-		
+		<Works client:load/>
 		<Services client:load />
 	</Main>
 </Layout>
