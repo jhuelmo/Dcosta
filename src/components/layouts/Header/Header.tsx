@@ -94,7 +94,7 @@ export function Header() {
             <motion.div variants={variants}>
                 <Button
                     asChild
-                    className="cursor-pointer letter-spacing-animation"
+                    className="buttonBubble cursor-pointer letter-spacing-animation"
                     size="lg"
                 >
                     <a href="/contact">Concreta una cita</a>
