@@ -1,15 +1,82 @@
 ---
-import ContactHero from '@/components/ContactHero.jsx';
-import Services from '@/components/Services';
-import Triad from '@/components/Triad/Triad.js';
-import Layout from '@/layouts/layout.astro';
-import Main from '@/layouts/main.astro';
+import Layout from "@/layouts/layout.astro";
+import Main from "@/layouts/main.astro";
+import { ContactForm } from "@/components/ContactForm/contactForm";
+import { Phone } from "lucide-react";
 ---
 
 <Layout>
-	<Main>
-		<ContactHero />
-		<Triad client:load />
-		<Services client:load />
-	</Main>
+  <Main>
+    <section class="flex flex-col items-center pt-36 px-4 bg-neutral-50">
+      <div class="text-center mb-8">
+        <h1 class="text-7xl font-bold text-primary mb-4">Haz que pase</h1>
+        <p class="text-base text-textColor max-w-xl mx-auto">
+          Completa el formulario a continuación o envíanos un mensaje
+          directamente.
+        </p>
+        <p>
+          ¡Creemos algo innovador <b
+            class="text-accent font-extrabold font-headings">JUNTOS</b
+          >!
+        </p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 w-full justify-center">
+        <div
+          class="bg-primary-light/5 border border-primary/10 text-neutral-900 rounded-xl p-8 min-w-[320px] flex-1 max-w-md"
+        >
+          <h2 class="text-2xl tracking-wider font-semibold text-primary mb-4">
+            Información de Contacto
+          </h2>
+          <div class="mb-5">
+            <div class="flex items-center mb-1">
+              <span class="mr-2"><Phone /></span><strong
+                class="text-accent-dark mr-2">Phone:</strong
+              >
+            </div>
+            <div class="ml-7">
+              Telefono Support: <a
+                class="text-accent underline"
+                href="tel:1-800-362-4573">+34 000 00 00</a
+              >
+            </div>
+            <div class="ml-7">
+              Telefono Ventas: <a
+                class="text-accent underline"
+                href="tel:1-800-362-4537">+34 000 00 00</a
+              >
+            </div>
+          </div>
+          <div class="mb-5">
+            <div class="flex items-center mb-1">
+              <span class="mr-2">✉️</span><strong class="text-accent-dark mr-2"
+                >Email:</strong
+              >
+            </div>
+            <div class="ml-7">
+              Dpt. Ventas: <a
+                class="text-accent underline"
+                href="mailto:info@sendix.com">info@ventas.com</a
+              >
+            </div>
+            <div class="ml-7">
+              Support: <a
+                class="text-accent underline"
+                href="mailto:support@sendix.com">support@sendix.com</a
+              >
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center mb-1">
+              <span class="mr-2">📍</span><strong class="text-accent-dark mr-2"
+                >Address:</strong
+              >
+            </div>
+            <div class="ml-7">123 Email Marketing Lane</div>
+            <div class="ml-7">Suite 456 Marketing City, MA 01234</div>
+          </div>
+        </div>
+        <ContactForm className="bg-primary text-primary-foreground" />
+      </div>
+    </section>
+  </Main>
 </Layout>

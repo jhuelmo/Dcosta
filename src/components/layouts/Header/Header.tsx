@@ -12,10 +12,10 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Home2", href: "/index2" },
-    { label: "Galeria", href: "/" },
-    { label: "Tecnología", href: "/" },
-    { label: "Equipo", href: "/" },
+    { label: "Servicios", href: "/services" },
+    { label: "Galeria", href: "/gallery" },
+    { label: "Tecnología", href: "/tecnology" },
+    { label: "Equipo", href: "/team" },
 ];
 
 export function Header({

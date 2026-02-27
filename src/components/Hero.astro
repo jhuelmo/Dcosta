@@ -5,26 +5,34 @@ import hero from "src/assets/hero-placeholder.png";
 ---
 
 <div class="h-screen flex-col items-center justify-center p-4 text-center">
-    <div class="img-wrapper relative w-full h-full rounded-3xl overflow-hidden">
-        <Image class=" object-cover" src={hero} alt="D'acosta labs" loading="lazy" />
-    </div>
-    <div class="absolute flex flex-col items-start left-0 bottom-0 pl-24 py-20 z-100 max-w-[50%] gap-4">
-        <h1 class="main-title text-neutral text-left text-8xl">D'acosta Labs</h1>
-        <span class="text-neutral-100 text-left text-shadow-2xs max-w-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur consequat faucibus enim, et sollicitudin orci volutpat sit amet</span>
-        <Button className="font-semibold" variant="accent" size="xl">CONTACT US</Button>
-    </div>
+  <div class="img-wrapper relative w-full h-full rounded-3xl overflow-hidden">
+    <Image class="object-cover" src={hero} alt="D'acosta labs" loading="lazy" />
+  </div>
+  <div
+    class="absolute flex flex-col items-start left-0 bottom-0 pl-24 py-20 z-100 max-w-[50%] gap-4"
+  >
+    <h1 class="main-title text-neutral">D'acosta Labs</h1>
+    <span class="text-neutral-100 text-left text-shadow-2xs max-w-xl"
+      >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+      consequat faucibus enim, et sollicitudin orci volutpat sit amet</span
+    >
+    <Button className="font-semibold" variant="accent" size="xl"
+      >CONTACT US</Button
+    >
+  </div>
 </div>
 
 <style>
-	.img-wrapper::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
-		z-index: 10;
-		border-radius: 1.5rem;
-	}
-    .main-title{
-        font-size: clamp(48px, 26.55px + 100vw * .055, 130px);;
-    }
+  .img-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+    z-index: 10;
+    border-radius: 1.5rem;
+  }
+  .main-title {
+    font-size: clamp(48px, 26.55px + 100vw * 0.065, 360px);
+    line-height: 1;
+  }
 </style>

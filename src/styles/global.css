@@ -1,124 +1,153 @@
 @import "tailwindcss";
 
-@theme {
-    /* COLORS */
-    --color-primary: #072957;
-    --color-primary-light: #4a90e2;
-    --color-primary-foreground: #fff;
+@theme
+{
+	/* COLORS */
+	--color-primary: #072957;
+	--color-primary-light: #4a90e2;
+	--color-primary-foreground: #fff;
 
-    --color-accent: #c9b27c;
-    --color-accent-dark: #9f8653;
-    --color-accent-foreground: #fff;
+	--color-accent: #c9b27c;
+	--color-accent-dark: #9f8653;
+	--color-accent-foreground: #fff;
 
-    --color-neutral: #fbfbfb;
-    --color-neutral-foreground: #2d4453;
-    --color-neutral-dark: #22333e;
-    --color-neutral-dark-foreground: #fff;
+	--color-neutral: #fbfbfb;
+	--color-neutral-foreground: #2d4453;
+	--color-neutral-dark: #22333e;
+	--color-neutral-dark-foreground: #fff;
 
-    --color-textColor: #2d4453;
+	--color-textColor: #2d4453;
 
-    --gray-gradient: rgba(229, 233, 240, 0.5), #fff;
-    --shadow-elevated:
-        0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33),
-        0 16px 32px rgba(96, 115, 159, 0.33);
+	--gray-gradient: rgba(229, 233, 240, 0.5), #fff;
+	--shadow-elevated:
+		0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33),
+		0 16px 32px rgba(96, 115, 159, 0.33);
 
-    /* SIZES AND MARGINS */
-    --page-max-width: 1440px;
+	/* SIZES AND MARGINS */
+	--page-max-width: 1440px;
 
-    /* TYPOGRAPHY */
-    --font-headings: "Comfortaa", cursive;
-    --font-body: "Raleway", sans-serif;
+	/* TYPOGRAPHY */
+	/* --font-headings: "Comfortaa", cursive; */
+	--font-headings: "Bebas Neue", cursive;
+	--font-body: "Raleway", sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-    min-width: 0;
+*
+{
+	box-sizing: border-box;
+	min-width: 0;
 }
 
-html {
-    overflow-x: clip;
+html
+{
+	overflow-x: clip;
 }
+
 html,
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip;
+body
+{
+	width: 100%;
+	max-width: 100%;
+	overflow-x: clip;
 }
 
 html.lenis,
-html.lenis body {
-    height: auto;
+html.lenis body
+{
+	height: auto;
 }
 
-.lenis.lenis-smooth {
-    scroll-behavior: auto !important;
+.lenis.lenis-smooth
+{
+	scroll-behavior: auto !important;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
+.lenis.lenis-smooth [data-lenis-prevent]
+{
+	overscroll-behavior: contain;
 }
 
-.lenis.lenis-stopped {
-    overflow: hidden;
+.lenis.lenis-stopped
+{
+	overflow: hidden;
 }
 
-.lenis.lenis-scrolling iframe {
-    pointer-events: none;
+.lenis.lenis-scrolling iframe
+{
+	pointer-events: none;
 }
 
-body {
-    font-family: "Raleway", sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    color: var(--color-textColor);
-    font-size: 16px;
-    line-height: 1.7;
+body
+{
+	font-family: var(--font-body);
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: var(--color-textColor);
+	font-size: 16px;
+	line-height: 1.7;
 }
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: "Comfortaa", sans-serif;
+h6
+{
+	font-family: var(--font-headings)
 }
+
 strong,
-b {
-    font-weight: 700;
-}
-@media (max-width: 720px) {
-    body {
-        font-size: 16px;
-    }
-    main {
-        padding: 1em;
-    }
+b
+{
+	font-weight: 700;
 }
 
-@layer components {
-    .container-lg {
-        @apply max-w-6xl mx-auto;
-    }
-    .container-xl {
-        @apply max-w-7xl mx-auto;
-    }
+@media (max-width: 720px)
+{
+	body
+	{
+		font-size: 16px;
+	}
 
-    .section {
-        @apply py-16;
-    }
+	main
+	{
+		padding: 1em;
+	}
+}
 
-    .footer {
-        @apply py-16 border-1 border-t border-gray-200;
-    }
+@layer components
+{
+	.container-lg
+	{
+		@apply max-w-6xl mx-auto;
+	}
 
-    .letter-spacing-animation {
-        transition: letter-spacing 0.3s ease-in-out;
-    }
+	.container-xl
+	{
+		@apply max-w-7xl mx-auto;
+	}
 
-    .letter-spacing-animation:hover {
-        letter-spacing: 2px;
-    }
+	.section
+	{
+		@apply py-16;
+	}
+
+	.footer
+	{
+		@apply py-16 border-1 border-t border-gray-200;
+	}
+
+	.letter-spacing-animation
+	{
+		transition: letter-spacing 0.3s ease-in-out;
+	}
+
+	.letter-spacing-animation:hover
+	{
+		letter-spacing: 2px;
+	}
 }
