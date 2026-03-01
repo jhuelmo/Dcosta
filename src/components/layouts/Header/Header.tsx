@@ -13,9 +13,9 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 const navLinks = [
     { label: "Home", href: "/" },
     { label: "Servicios", href: "/services" },
-    { label: "Galeria", href: "/gallery" },
     { label: "Tecnología", href: "/tecnology" },
     { label: "Equipo", href: "/team" },
+    { label: "Galeria", href: "/gallery" },
 ];
 
 export function Header({
