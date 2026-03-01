@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/layout.astro";
+import Work from "@/layouts/work.astro";
+import service1 from "@/assets/Services/Service-1.jpg";
+import service2 from "@/assets/Services/Service-2.jpg";
+import service3 from "@/assets/Services/Service-3.jpg";
+import { WorkInfo } from "@/components/layouts/Works/workInfo";
+
+export type Project = {
+  slug: string;
+  title: string;
+  info: ProjectInfo;
+  image: string;
+};
+
+export type ProjectInfo = {
+  role: string;
+  client: string;
+  technology: string[];
+};
+
+export function getStaticPaths() {
+  const projects : Project[] = [
+    { slug: "corona-1", title: "Corona 1", info: { role: "Prostodoncia", client: "Clínica Dental", technology: ["Zirconio", "CAD/CAM"] }, image: service1.src },
+    { slug: "implante-1", title: "Implante 1", info: { role: "Implantología", client: "Centro Odontológico", technology: ["Zirconio", "Implantología"] }, image: service2.src },
+    { slug: "corona-2", title: "Corona 2", info: { role: "Prostodoncia", client: "Consultorio Privado", technology: ["Zirconio"] }, image: service3.src },
+    { slug: "implante-2", title: "Implante 2", info: { role: "Implantología", client: "Clínica Premium", technology: ["Titanio", "CAD/CAM"] }, image: service1.src },
+  ];
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout>
+  <Work title={project.title}>
+    <div class="flex w-full space-y-6">
+      <WorkInfo {...project} />
+      <img
+        src={project.image}
+        alt={project.title}
+        class="flex-3 rounded-3xl object-cover aspect-16/10 "
+      />
+    </div>
+  </Work>
+</Layout>

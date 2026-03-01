@@ -1,0 +1,24 @@
+---
+import { Footer } from "@/components/layouts/Footer/Footer";
+import { Header } from "@/components/layouts/Header/Header";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+<Header client:load />
+    <section class="flex flex-col items-center py-40 px-12">
+      <div class="flex flex-col gap-8 w-full">
+        <h1 class="text-center main-title font-bold text-primary mb-2">{title}</h1>
+        <div class="w-full flex gap-40 items-stretch">
+            <div class="absolute">
+                <a href="/gallery" class="font-bold text-accent-dark">VOLVER A LA GALERIA</a>
+            </div>
+            <slot />
+        </div>
+      </div>
+    </section>
+<Footer />

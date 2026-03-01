@@ -1,11 +1,40 @@
 ---
-import Content from "@/layouts/content.astro";
 import Layout from "@/layouts/layout.astro";
+import Content from "@/layouts/content.astro";
+import service1 from "@/assets/Services/Service-1.jpg";
+import service2 from "@/assets/Services/Service-2.jpg";
+import service3 from "@/assets/Services/Service-3.jpg";
+
+const projects = [
+    { slug: "corona-1", title: "Corona 1", info: { role: "Prostodoncia", client: "Clínica Dental", technology: ["Zirconio", "CAD/CAM"] }, image: service1.src },
+    { slug: "implante-1", title: "Implante 1", info: { role:"Implantología", client: "Centro Odontológico", technology: ["Zirconio", "Implantología"] }, image: service2.src },
+    { slug: "corona-2", title: "Corona 2", info: { role: "Prostodoncia", client: "Consultorio Privado", technology: ["Zirconio"] }, image: service3.src },
+    { slug: "implante-2", title: "Implante 2", info: { role: "Implantología", client: "Clínica Premium", technology: ["Titanio", "CAD/CAM"] }, image: service1.src },
+];
 
 ---
 
 <Layout>
     <Content title="Nuestro trabajo" label="GALERIA">
-        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-8 md:gap-y-10 lg:gap-y-12">
+            {
+                projects.map((project) => (
+                    <a href={`/works/${project.slug}`} class="block">
+                        <article>
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                loading="lazy"
+                                class="w-full rounded-3xl object-cover aspect-4/3 md:aspect-16/10"
+                            />
+                            <div class="mt-4 flex items-end justify-between gap-4">
+                                <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium leading-none">{project.title}</h2>
+                                <span class="text-2xl md:text-3xl lg:text-4xl leading-none">{project.info.role}</span>
+                            </div>
+                        </article>
+                    </a>
+                ))
+            }
+        </div>
     </Content>
 </Layout>
