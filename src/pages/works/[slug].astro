@@ -5,6 +5,8 @@ import service1 from "@/assets/Services/Service-1.jpg";
 import service2 from "@/assets/Services/Service-2.jpg";
 import service3 from "@/assets/Services/Service-3.jpg";
 import { WorkInfo } from "@/components/layouts/Works/workInfo";
+import { Divider } from "@/components/ui/divider";
+import { Gallery } from "@/components/layouts/Gallery";
 
 export type Project = {
   slug: string;
@@ -14,17 +16,53 @@ export type Project = {
 };
 
 export type ProjectInfo = {
-  role: string;
-  client: string;
-  technology: string[];
+  campo: string;
+  cliente: string;
+  tecnologia: string[];
 };
 
 export function getStaticPaths() {
-  const projects : Project[] = [
-    { slug: "corona-1", title: "Corona 1", info: { role: "Prostodoncia", client: "Clínica Dental", technology: ["Zirconio", "CAD/CAM"] }, image: service1.src },
-    { slug: "implante-1", title: "Implante 1", info: { role: "Implantología", client: "Centro Odontológico", technology: ["Zirconio", "Implantología"] }, image: service2.src },
-    { slug: "corona-2", title: "Corona 2", info: { role: "Prostodoncia", client: "Consultorio Privado", technology: ["Zirconio"] }, image: service3.src },
-    { slug: "implante-2", title: "Implante 2", info: { role: "Implantología", client: "Clínica Premium", technology: ["Titanio", "CAD/CAM"] }, image: service1.src },
+  const projects: Project[] = [
+    {
+      slug: "corona-1",
+      title: "Corona 1",
+      info: {
+        campo: "Prostodoncia",
+        cliente: "Clínica Dental",
+        tecnologia: ["Zirconio", "CAD/CAM"],
+      },
+      image: service1.src,
+    },
+    {
+      slug: "implante-1",
+      title: "Implante 1",
+      info: {
+        campo: "Implantología",
+        cliente: "Centro Odontológico",
+        tecnologia: ["Zirconio", "Implantología"],
+      },
+      image: service2.src,
+    },
+    {
+      slug: "corona-2",
+      title: "Corona 2",
+      info: {
+        campo: "Prostodoncia",
+        cliente: "Consultorio Privado",
+        tecnologia: ["Zirconio"],
+      },
+      image: service3.src,
+    },
+    {
+      slug: "implante-2",
+      title: "Implante 2",
+      info: {
+        campo: "Implantología",
+        cliente: "Clínica Premium",
+        tecnologia: ["Titanio", "CAD/CAM"],
+      },
+      image: service1.src,
+    },
   ];
 
   return projects.map((project) => ({
@@ -33,18 +71,53 @@ export function getStaticPaths() {
   }));
 }
 
+const galleryRows = [
+  [service1.src],
+  [service2.src, service3.src],
+  [service3.src],
+];
+
 const { project } = Astro.props;
 ---
 
 <Layout>
   <Work title={project.title}>
     <div class="flex w-full space-y-6">
-      <WorkInfo {...project} />
-      <img
-        src={project.image}
-        alt={project.title}
-        class="flex-3 rounded-3xl object-cover aspect-16/10 "
-      />
+      <WorkInfo info={project.info} />
+      <div class="flex-3 flex flex-col gap-6">
+        <div class="rounded-3xl overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            class="object-cover aspect-16/10"
+          />
+        </div>
+
+        <div class="flex flex-col box overflow-hidden mt-12">
+          <Divider />
+          <div class="flex">
+            <div class="flex-1 uppercase text-sm font-bold text-primary/50">
+              Descripción
+            </div>
+            <h2 class="flex-1 text-xl">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ex
+              purus. Suspendisse potenti. Sed elit dolor, ultricies eget lacinia
+              fringilla, ullamcorper a libero. Pellentesque nulla ex, pulvinar
+              ultrices finibus quis, lacinia sit amet ipsum
+            </h2>
+          </div>
+
+          <div class="flex flex-col box overflow-hidden mt-12">
+            <Divider />
+            <div class="flex flex-col">
+              <div class="flex-1 text-sm font-bold uppercase text-primary/50">
+                Galería
+              </div>
+              <Gallery className="mt-12" rows={galleryRows} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </Work>
 </Layout>
