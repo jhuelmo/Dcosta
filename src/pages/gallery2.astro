@@ -51,33 +51,31 @@ const projects = [
 ---
 
 <Layout>
-  <Content
-    textExtra=`${projects.length} Proyectos`
-    title="Nuestro trabajo"
-    label="GALERIA"
-  >
-    <Divider />
-    <div class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <Content title="Nuestro trabajo" label="GALERIA" type="center">
+    <div class="mt-8 pt-8 grid grid-cols-1 gap-4">
       {
         projects.map((project) => (
-          <a href={`/works/${project.slug}`} class="block">
-            <article>
+          <article class="flex flex-row relative">
+            <a
+              href={`/works/${project.slug}`}
+              class="block w-2/3 mx-auto rounded-3xl"
+            >
               <img
                 src={project.image}
                 alt={project.title}
                 loading="lazy"
-                class="w-full rounded-3xl object-cover aspect-4/3 md:aspect-16/10"
+                class=" object-cover aspect-4/3 md:aspect-16/10"
               />
-              <div class="mt-4 flex items-end justify-between gap-4">
-                <h2 class="text-3xl md:text-3xl lg:text-3xl lowercase font-medium leading-none">
-                  {project.title}
-                </h2>
-                <span class="text-lg md:text-lg lg:text-lg leading-none">
-                  {project.info.role}
-                </span>
-              </div>
-            </article>
-          </a>
+            </a>
+            <div class="sticky top-[50%] w-full">
+              <span class="text-lg md:text-lg lg:text-lg leading-none">
+                {project.info.role}
+              </span>
+              <span class="text-right text-lg md:text-lg lg:text-lg">
+                {project.info.role}
+              </span>
+            </div>
+          </article>
         ))
       }
     </div>

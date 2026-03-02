@@ -5,22 +5,39 @@ import { Header } from "@/components/layouts/Header/Header";
 interface Props {
   title: string;
   label: string;
+  type?: "center" | "default";
+  textExtra?: string;
 }
 
-const { title, label } = Astro.props as Props;
+const { title, label, type = "default", textExtra } = Astro.props as Props;
 ---
 
 <Header client:load />
-    <section class="flex flex-col items-start p-4 ">
-      <div class="flex flex-col gap-8 items-start py-40 px-12 w-full">
-        <span class="text-sm border border-primary/50 rounded-full px-2 py-1 tracking-widest">{label}</span>
-        <div class="text-left w-full flex flex-col">
-          <h1 class="main-title font-bold text-primary/70 mb-2">{title}</h1>
-        </div>
-        <div class="w-full flex gap-40 items-stretch">
-          <div class="flex flex-col md:flex-row gap-8 w-full justify-center items-stretch">
-           <slot />
-        </div>
-      </div>
-    </section>
-<Footer />
+<section
+  class={`flex flex-col ${type === "center" ? "items-center" : "items-start"} px-8`}
+>
+  <div
+    class={`flex flex-col gap-8 ${type === "center" ? "items-center" : "items-start"} py-40 w-full`}
+  >
+    <span
+      class="text-sm border border-primary/50 rounded-full px-2 py-1 tracking-widest"
+      >{label}</span
+    >
+    <div class="text-left w-full flex flex-col justify-between items-center">
+      <h1 class="main-title font-bold text-primary/70 mb-2">{title}</h1>
+      {
+        textExtra && (
+          <span
+            class={`${type === "center" ? "self-center" : "self-end"} text-md font-medium uppercase font-headings text-primary/50`}
+          >
+            {textExtra}
+          </span>
+        )
+      }
+    </div>
+    <div class="w-full flex flex-col items-stretch">
+      <slot />
+    </div>
+  </div>
+  <Footer />
+</section>
