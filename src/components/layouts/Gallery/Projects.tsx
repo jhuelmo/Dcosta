@@ -13,16 +13,16 @@ export function Projects({projects} :  ProjectProps){
 	<>
         {projects.map((project) => (
           <article className="flex flex-row relative" key={project.slug}>
-            <a href={`/works/${project.slug}`} className="block w-full rounded-3xl">
+            <a href={`/works/${project.slug}`} className="flex flex-col justify-center gap-12 md:block w-full rounded-3xl">
 
-              <div className="sticky flex justify-between items-center top-[50%] w-full">
-                <span className="text-lg md:text-lg lg:text-lg leading-none h-[0.7vw] uppercase font-bold">
-                  {project.title}
-                </span>
-                <span className="text-lg md:text-lg lg:text-lg leading-none h-[0.7vw] uppercase font-bold">
-                  {project.info.campo}
-                </span>
-              </div>
+				<div className="relative md:sticky flex flex-col gap-1 md:flex-row md:justify-between items-center top-0 md:top-[50%] w-full mb-2 md:mb-0">
+					<span className="text-sm md:text-md lg:text-lg leading-none h-auto md:h-[0.7vw] uppercase font-bold">
+						{project.title}
+					</span>
+					<span className="text-sm md:text-md lg:text-lg leading-none h-auto md:h-[0.7vw] uppercase font-bold">
+						{project.info.campo}
+					</span>
+				</div>
 			  
               <ProjectCard project={project} />
             </a>
@@ -39,12 +39,12 @@ function ProjectCard({ project }: { project: Project }) {
     offset: ["start end", "end start"],
   });
 
-  const width = useTransform(scrollYProgress, [0, 0.9], ["60%", "70%"]);
+  const width = useTransform(scrollYProgress, [0, 0.8], ["60%", "70%"]);
 
   return (
     <div
       ref={ref}
-      className="h-[35vw] max-w-full mx-auto mt-[-0.7vw] relative"
+      className="h-[70vw] lg:h-[40vw] max-w-full md:mx-auto md:mt-[-0.7vw] relative"
     >
       {/* Wrapper máscara — crece con el scroll */}
       <motion.div
