@@ -5,15 +5,17 @@ import service1 from "@/assets/Services/Service-1.jpg";
 import service2 from "@/assets/Services/Service-2.jpg";
 import service3 from "@/assets/Services/Service-3.jpg";
 import { Divider } from "@/components/ui/divider";
+import CursorBubble from "@/components/ui/cursorBubble";
+import type { Project } from "@/types/project";
 
-const projects = [
+const projects: Project[] = [
   {
     slug: "corona-1",
     title: "Corona 1",
     info: {
-      role: "Prostodoncia",
-      client: "Clínica Dental",
-      technology: ["Zirconio", "CAD/CAM"],
+      campo: "Prostodoncia",
+      cliente: "Clínica Dental",
+      tecnologia: ["Zirconio", "CAD/CAM"],
     },
     image: service1.src,
   },
@@ -21,9 +23,9 @@ const projects = [
     slug: "implante-1",
     title: "Implante 1",
     info: {
-      role: "Implantología",
-      client: "Centro Odontológico",
-      technology: ["Zirconio", "Implantología"],
+      campo: "Implantología",
+      cliente: "Centro Odontológico",
+      tecnologia: ["Zirconio", "Implantología"],
     },
     image: service2.src,
   },
@@ -31,9 +33,9 @@ const projects = [
     slug: "corona-2",
     title: "Corona 2",
     info: {
-      role: "Prostodoncia",
-      client: "Consultorio Privado",
-      technology: ["Zirconio"],
+      campo: "Prostodoncia",
+      cliente: "Consultorio Privado",
+      tecnologia: ["Zirconio"],
     },
     image: service3.src,
   },
@@ -41,9 +43,9 @@ const projects = [
     slug: "implante-2",
     title: "Implante 2",
     info: {
-      role: "Implantología",
-      client: "Clínica Premium",
-      technology: ["Titanio", "CAD/CAM"],
+      campo: "Implantología",
+      cliente: "Clínica Premium",
+      tecnologia: ["Titanio", "CAD/CAM"],
     },
     image: service1.src,
   },
@@ -57,23 +59,26 @@ const projects = [
     label="GALERIA"
   >
     <Divider />
-    <div class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div
+      data-hover
+      class="pt-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8"
+    >
       {
         projects.map((project) => (
           <a href={`/works/${project.slug}`} class="block">
-            <article>
+            <article class="flex flex-col gap-8">
               <img
                 src={project.image}
                 alt={project.title}
                 loading="lazy"
                 class="w-full rounded-3xl object-cover aspect-4/3 md:aspect-16/10"
               />
-              <div class="mt-4 flex items-end justify-between gap-4">
-                <h2 class="text-3xl md:text-3xl lg:text-3xl lowercase font-medium leading-none">
+              <div class="mt-4 flex items-center justify-between gap-4">
+                <h2 class="text-4xl lowercase font-medium leading-none">
                   {project.title}
                 </h2>
-                <span class="text-lg md:text-lg lg:text-lg leading-none">
-                  {project.info.role}
+                <span class="text-2xl font-medium opacity-50">
+                  {project.info.campo}
                 </span>
               </div>
             </article>
@@ -81,5 +86,6 @@ const projects = [
         ))
       }
     </div>
+    <CursorBubble selector="[data-hover]" client:load />
   </Content>
 </Layout>

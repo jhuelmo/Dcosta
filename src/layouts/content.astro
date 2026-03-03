@@ -14,7 +14,7 @@ const { title, label, type = "default", textExtra } = Astro.props as Props;
 
 <Header client:load />
 <section
-  class={`flex flex-col ${type === "center" ? "items-center" : "items-start"} px-8`}
+  class={`flex flex-col ${type === "center" ? "items-center" : "items-start"} padding-page`}
 >
   <div
     class={`flex flex-col gap-8 ${type === "center" ? "items-center" : "items-start"} py-40 w-full`}
@@ -23,7 +23,9 @@ const { title, label, type = "default", textExtra } = Astro.props as Props;
       class="text-sm border border-primary/50 rounded-full px-2 py-1 tracking-widest"
       >{label}</span
     >
-    <div class="text-left w-full flex flex-col justify-between items-center">
+    <div
+      class={`text-left w-full flex flex-col justify-between ${type === "center" ? "items-center" : "items-start"}`}
+    >
       <h1 class="main-title font-bold text-primary/70 mb-2">{title}</h1>
       {
         textExtra && (
@@ -39,5 +41,5 @@ const { title, label, type = "default", textExtra } = Astro.props as Props;
       <slot />
     </div>
   </div>
-  <Footer />
 </section>
+<Footer />

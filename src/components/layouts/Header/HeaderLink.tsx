@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 interface HeaderLinkProps {
     href: string;
@@ -11,11 +11,15 @@ export function HeaderLink({
     className = "",
     children,
 }: HeaderLinkProps) {
-    const pathname =
-        typeof window !== "undefined" ? window.location.pathname : "";
-    const isActive =
-        href === pathname ||
-        href === "/" + (pathname.match(/[^\/]+/g)?.[0] || "");
+    const [isActive, setIsActive] = useState(false);
+
+    useEffect(() => {
+        const pathname = window.location.pathname;
+        const active =
+            href === pathname ||
+            href === "/" + (pathname.match(/[^\/]+/g)?.[0] || "");
+        setIsActive(active);
+    }, [href]);
 
     return (
         <a

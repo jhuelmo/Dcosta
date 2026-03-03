@@ -1,7 +1,7 @@
 
 
 function Divider(){
-	return <div className="mb-8 h-px w-full bg-accent/50"></div>
+	return <div className="mb-8 h-px w-full bg-primary/10"></div>
 }
 
 export { Divider };

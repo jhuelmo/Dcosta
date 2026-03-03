@@ -7,19 +7,7 @@ import service3 from "@/assets/Services/Service-3.jpg";
 import { WorkInfo } from "@/components/layouts/Works/workInfo";
 import { Divider } from "@/components/ui/divider";
 import { Gallery } from "@/components/layouts/Gallery";
-
-export type Project = {
-  slug: string;
-  title: string;
-  info: ProjectInfo;
-  image: string;
-};
-
-export type ProjectInfo = {
-  campo: string;
-  cliente: string;
-  tecnologia: string[];
-};
+import type { Project } from "@/types/project";
 
 export function getStaticPaths() {
   const projects: Project[] = [
