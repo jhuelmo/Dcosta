@@ -45,21 +45,21 @@ const Triad = () => {
                             frameStart={1500}
                             style={{ color: textColor as any }}
                         >
-                            Innovación
+                            INNOVACION
                         </TriadElement>
                         <TriadElement
                             className="font-medium z-100 !color-primary-foreground"
                             scrollY={scrollY}
                             frameStart={2350}
                         >
-                            Trato humano
+                            TRATO HUMANO
                         </TriadElement>
                         <TriadElement
                             className="font-black z-100 !color-primary-foreground"
                             scrollY={scrollY}
                             frameStart={2800}
                         >
-                            Capacidad resolutiva
+                            CAPACIDAD RESOLUTIVA
                         </TriadElement>
                         <motion.div
                             className="fixed w-screen h-screen z-90 p-4  overflow-hidden"

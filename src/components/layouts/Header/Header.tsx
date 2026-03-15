@@ -16,6 +16,9 @@ const navLinks = [
     { label: "Tecnología", href: "/tecnology" },
     { label: "Equipo", href: "/team" },
     { label: "Galeria", href: "/gallery" },
+    { label: "Galeria2", href: "/gallery2" },
+
+
 ];
 
 export function Header({

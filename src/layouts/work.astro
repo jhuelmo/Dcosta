@@ -10,15 +10,17 @@ const { title } = Astro.props as Props;
 ---
 
 <Header client:load />
-    <section class="flex flex-col items-center py-40 px-12">
-      <div class="flex flex-col gap-8 w-full">
-        <h1 class="text-center main-title font-bold text-primary mb-2">{title}</h1>
-        <div class="w-full flex gap-40 items-stretch">
-            <div class="absolute">
-                <a href="/gallery" class="font-bold text-accent-dark">VOLVER A LA GALERIA</a>
-            </div>
-            <slot />
-        </div>
+<section class="flex flex-col items-center py-40 px-8">
+  <div class="flex flex-col gap-8 w-full">
+    <h1 class="text-center main-title font-bold text-primary mb-2">{title}</h1>
+    <div class="w-full flex gap-40 items-stretch">
+      <div class="absolute z-1000">
+        <a href="/gallery" class="font-bold text-accent-dark"
+          >VOLVER A LA GALERIA</a
+        >
       </div>
-    </section>
+      <slot />
+    </div>
+  </div>
+</section>
 <Footer />

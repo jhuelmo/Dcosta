@@ -13,10 +13,10 @@ const InfoRow = ({
 }) => {
     return (
         <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-medium tracking-widest text-primary/50">
+            <h2 className="text-md font-medium tracking-widest text-primary/50">
                 {label}
             </h2>
-            <span className="text-2xl font-medium">
+            <span className="text-xl font-medium">
                 {Array.isArray(value) ? value.join(", ") : value}
             </span>
         </div>
@@ -25,14 +25,17 @@ const InfoRow = ({
 
 export function WorkInfo({ info }: WorkInfoProps) {
     return (
-        <div className="flex-1 flex flex-col gap-6 justify-end h-full">
-            {Object.keys(info).map((key) => (
-                <InfoRow
-                    key={key}
-                    label={key}
-                    value={info[key as keyof ProjectInfo]}
-                />
-            ))}
+        <div className="flex-1 flex flex-col gap-6 h-full relative">
+			<div className="flex flex-col gap-6 sticky top-0 pt-[50vh]">
+
+				{Object.keys(info).map((key) => (
+					<InfoRow
+						key={key}
+						label={key}
+						value={info[key as keyof ProjectInfo]}
+					/>
+				))}
+			</div>
         </div>
     );
 }
