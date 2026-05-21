@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_triads",
+  "info": {
+    "displayName": "Triad"
+  },
+  "options": {},
+  "attributes": {
+    "slogan": {
+      "type": "string"
+    },
+    "triad1": {
+      "type": "string"
+    },
+    "triad2": {
+      "type": "string"
+    },
+    "triad3": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

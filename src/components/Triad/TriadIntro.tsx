@@ -10,10 +10,11 @@ import { useRef } from "react";
 import { StickyBlock } from "../ui/stickyBlock";
 
 interface TriadIntroProps {
+    text: string;
     scrollYProgress: MotionValue<number>;
 }
 
-export const TriadIntro = ({ scrollYProgress}: TriadIntroProps) => {
+export const TriadIntro = ({ text, scrollYProgress}: TriadIntroProps) => {
     const h2Ref = useRef<HTMLHeadingElement>(null);
     const anchorX = useMotionValue(0);
     const anchorY = useMotionValue(0);
@@ -65,7 +66,7 @@ export const TriadIntro = ({ scrollYProgress}: TriadIntroProps) => {
                             scale,
                         }}
                     >
-                        Calidad que sonríe
+                        {text}
                     </motion.h2>
                 </div>
             </StickyBlock>

@@ -7,9 +7,13 @@ import {
 import { TriadElement } from "./TriadElement";
 import { TriadIntro } from "./TriadIntro";
 import { StickyBlock } from "../ui/stickyBlock";
+import type { TriadData } from "@/lib/strapi";
 
-const Triad = () => {
+const Triad = ({slogan, triad1, triad2, triad3}: TriadData) => {
     const ref = useRef(null);
+
+    console.log("TRIAD: ", {slogan, triad1, triad2, triad3});
+
 
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -30,7 +34,7 @@ const Triad = () => {
 
     return (
         <section ref={ref} className="bg-white">
-            <TriadIntro scrollYProgress={scrollYProgress} />
+            <TriadIntro text={slogan} scrollYProgress={scrollYProgress} />
 
             {/* 2800 appear */}
             <main className="relative h-[160vh] mb-[30vh]">
@@ -42,21 +46,21 @@ const Triad = () => {
                             frameStart={0.50}
                             style={{ color: textColor as any }}
                         >
-                            INNOVACION
+                            {triad1}
                         </TriadElement>
                         <TriadElement
                             className="font-medium z-100 !color-primary-foreground"
                             scrollYProgress={scrollYProgress}
                             frameStart={0.58}
                         >
-                            TRATO HUMANO
+                            {triad2}
                         </TriadElement>
                         <TriadElement
                             className="font-black z-100 !color-primary-foreground"
                             scrollYProgress={scrollYProgress}
                             frameStart={0.66}
                         >
-                            CAPACIDAD RESOLUTIVA
+                            {triad3}
                         </TriadElement>
                         <motion.div
                             className="fixed w-screen h-screen z-90 p-4  overflow-hidden"

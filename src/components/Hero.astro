@@ -1,24 +1,36 @@
 ---
 import { Button } from "./ui/button";
-import { Image } from "astro:assets";
-import hero from "src/assets/hero-placeholder.png";
+
+interface Props {
+  heroH1: string;
+  subtitle: string;
+  ctaText: string;
+  ctaUrl: string;
+  imageUrl: string;
+}
+
+const { heroH1, subtitle, ctaText, ctaUrl, imageUrl } = Astro.props;
+const STRAPI_URL = import.meta.env.STRAPI_URL ?? "http://localhost:1337";
 ---
 
 <div class="h-screen flex-col items-center justify-center p-4 text-center">
   <div class="img-wrapper relative w-full h-full rounded-3xl overflow-hidden">
-    <Image class="object-cover" src={hero} alt="D'acosta labs" loading="eager" />
+    <img 
+      class="object-cover" 
+      src={`${STRAPI_URL}${imageUrl}`} 
+      alt="D'acosta labs" 
+      loading="eager" />
   </div>
   <div
     class="absolute flex flex-col items-start left-0 bottom-0 pl-24 py-20 z-100 max-w-[60%] gap-4"
   >
-    <h1 class="main-title text-neutral">D'ACOSTA LABS</h1>
+    <h1 class="main-title text-neutral">{heroH1}</h1>
     <span class="text-neutral-100 text-left text-shadow-2xs max-w-xl"
-      >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-      consequat faucibus enim, et sollicitudin orci volutpat sit amet</span
+      >{subtitle}</span
     >
-    <Button className="font-semibold" variant="accent" size="xl"
-      >CONTACT US</Button
-    >
+    <Button className="font-semibold" variant="accent" size="xl">
+      {ctaText}
+    </Button>
   </div>
 </div>
 

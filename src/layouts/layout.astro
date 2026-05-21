@@ -1,12 +1,20 @@
 ---
 import Head from "@/components/Head.astro";
 import SmoothScroll from "@/components/SmoothScroll.tsx";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { getGlobal } from "@/lib/strapi";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Default Title", description = "Default Description" } : Props = Astro.props;
+
 
 ---
 <!doctype html>
 <html lang="es">
-	<Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<Head title={title} description={description} />
 	<body>
 		<SmoothScroll client:load>
 			<slot />
