@@ -8,7 +8,7 @@ interface Props {
         anchorY: MotionValue<number>;
     };
     startPoint?: { x: number; y: number };
-    scrollY: MotionValue<number>;
+    scrollYProgress: MotionValue<number>;
     className?: string;
     offset?: { x: number; y: number };
 }
@@ -16,7 +16,7 @@ interface Props {
 export const FloatingImage = ({
     anchor: { anchorX, anchorY },
     startPoint = { x: 0, y: 0 },
-    scrollY,
+    scrollYProgress,
     className,
     offset = { x: 0, y: 0 },
 }: Props) => {
@@ -48,8 +48,8 @@ export const FloatingImage = ({
     };
 
     const progress = useTransform(
-        scrollY,
-        [900, 1750, 1900, 2350],
+        scrollYProgress,
+        [0.05, 0.30, 0.35, 0.45],
         [0, 0.7, 0.9, 1],
     );
 

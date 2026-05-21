@@ -4,11 +4,11 @@ import {
     useMotionValueEvent,
     useScroll,
     AnimatePresence,
+    type Variants,
 } from "motion/react";
 import { HeaderLink } from "./HeaderLink";
 import { Button } from "@/components/ui/button";
 import logoUrl from "@/assets/logo-placeholder.png";
-import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 const navLinks = [
     { label: "Home", href: "/" },
@@ -24,14 +24,13 @@ const navLinks = [
 export function Header({
     variant = "default",
 }: {
-    variant?: "default" | "variant2";
+    variant?: "default";
 }) {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const isDesktop = useBreakpoint(1024);
 
-    const variants = {
+    const variants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -43,12 +42,12 @@ export function Header({
         },
     };
 
-    const headerVariants = {
+    const headerVariants: Variants = {
         hidden: { opacity: 0, scale: 0.95, width: "180px", y: -100, x: "-50%" },
         visible: {
             opacity: 1,
             scale: 1,
-            width: "72%",
+            width: "1280px",
             y: 0,
             x: "-50%",
             transition: {
@@ -75,7 +74,7 @@ export function Header({
         },
     };
 
-    const mobileMenuVariants = {
+    const mobileMenuVariants: Variants = {
         hidden: {
             opacity: 0,
             y: -8,
@@ -95,7 +94,7 @@ export function Header({
         },
     };
 
-    const menuItemVariants = {
+    const menuItemVariants: Variants = {
         hidden: { opacity: 0, x: -12 },
         visible: {
             opacity: 1,
@@ -122,9 +121,7 @@ export function Header({
 
     return (
         <>
-            {variant === "default" && (
-                <>
-                    <motion.header
+            <motion.header
                         initial="hidden"
                         animate={collapsed ? "collapsed" : "visible"}
                         variants={headerVariants}
@@ -274,45 +271,6 @@ export function Header({
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </>
-            )}
-
-            {variant === "variant2" && (
-                <header className="absolute w-full z-20 flex items-center justify-center  px-24 py-8">
-                    <div className="flex w-full justify-between">
-                        <div className="relative h-auto w-100 overflow-visible">
-                            <img
-                                className="absolute -top-1/4 left-0 scale-[0.5] origin-top-left grayscale-100 brightness-2000"
-                                src={
-                                    typeof logoUrl === "string"
-                                        ? logoUrl
-                                        : logoUrl.src
-                                }
-                                alt="Logo"
-                            />
-                        </div>
-                        <div className="flex items-center gap-4  font-semibold">
-                            <Button
-                                asChild
-                                variant="ghost"
-                                className="cursor-pointer rounded-xl text-md text-primary-foreground bg-primary/1 border border-primary/10 backdrop-blur-sm"
-                                size="lg"
-                            >
-                                <a href="/signup">Log in</a>
-                            </Button>
-
-                            <Button
-                                asChild
-                                variant="inverse"
-                                className="cursor-pointer letter-spacing-animation rounded-xl text-md"
-                                size="lg"
-                            >
-                                <a href="/signup">Concreta una cita</a>
-                            </Button>
-                        </div>
-                    </div>
-                </header>
-            )}
         </>
     );
 }

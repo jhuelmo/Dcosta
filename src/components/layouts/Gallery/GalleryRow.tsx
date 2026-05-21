@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 interface GalleryRowProps {
     images: string[];
 }
@@ -11,7 +9,6 @@ export function GalleryRow({ images }: GalleryRowProps) {
 		3: "grid-cols-3",
 		}[images.length] || "grid-cols-3";
 
-	console.log("Grid class:", colsClass);
     return (
         <div className={`grid gap-2 ${colsClass}`}>
             {images.map((src, index) => (

@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import ServiceCard from "./ServiceCard";
-import { services } from "./servicesData";
+import { services } from "./servicesData.ts";
 
 const Services = () => {
     return (
@@ -13,14 +13,15 @@ const Services = () => {
                         SERVICIOS
                     </h2>
 
-                    <motion.button
+                    <motion.a
+                        href="/services"
                         className="flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-full font-medium hover:bg-accent-dark transition-colors"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
                         Ver Todos los Servicios
                         <ArrowUpRight className="w-5 h-5" />
-                    </motion.button>
+                    </motion.a>
                 </div>
 
                 {/* Services Grid */}

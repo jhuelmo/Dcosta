@@ -1,5 +1,5 @@
 import type { Project } from "@/types/project";
-import { motion, useInView, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
 interface ProjectProps{

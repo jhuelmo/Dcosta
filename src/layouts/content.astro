@@ -1,6 +1,7 @@
 ---
 import { Footer } from "@/components/layouts/Footer/Footer";
 import { Header } from "@/components/layouts/Header/Header";
+import Title from "@/components/ui/title";
 
 interface Props {
   title: string;
@@ -14,8 +15,10 @@ const { title, label, type = "default", textExtra } = Astro.props as Props;
 
 <Header client:load />
 <section
-  class={`flex flex-col ${type === "center" ? "items-center" : "items-start"} padding-page`}
->
+  class={`flex flex-col bg-primary-light/5 ${type === "center" ? "items-center" : "items-start"} padding-page`}
+> 
+<div class="container-xl">
+
   <div
     class={`flex flex-col gap-8 ${type === "center" ? "items-center" : "items-start"} py-40 w-full`}
   >
@@ -26,7 +29,7 @@ const { title, label, type = "default", textExtra } = Astro.props as Props;
     <div
       class={`text-left w-full flex flex-col justify-between ${type === "center" ? "items-center" : "items-start"}`}
     >
-      <h1 class="main-title font-bold text-primary/70 mb-2">{title}</h1>
+      <Title client:load title={title} />
       {
         textExtra && (
           <span
@@ -37,9 +40,10 @@ const { title, label, type = "default", textExtra } = Astro.props as Props;
         )
       }
     </div>
-    <div class="w-full flex flex-col items-stretch">
+    <div class="w-full flex flex-col items-stretch mt-12">
       <slot />
     </div>
   </div>
+</div>
 </section>
 <Footer />

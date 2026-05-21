@@ -1,6 +1,4 @@
-'use client';
-
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { motion, useMotionValue, useSpring, type Variants } from 'motion/react';
 import React, { useEffect, useState, useCallback } from 'react';
 
 interface CursorBubbleProps {
@@ -25,7 +23,7 @@ const CursorBubble: React.FC<CursorBubbleProps> = ({ selector, offsetX = 15, off
 		damping: 25,
 	});
 
-	const variants = {
+	const variants: Variants = {
 		hidden: { 
 			opacity: 0, 
 			scale: 0.2, 

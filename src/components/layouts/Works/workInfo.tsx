@@ -1,4 +1,4 @@
-import type { ProjectInfo } from "@/pages/works/[slug].astro";
+import type { ProjectInfo } from "@/types/project";
 
 interface WorkInfoProps {
     info: ProjectInfo;

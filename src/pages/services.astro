@@ -1,4 +1,5 @@
 ---
+import ServiceList from "@/components/Services/ServiceList";
 import Content from "@/layouts/content.astro";
 import Layout from "@/layouts/layout.astro";
 
@@ -6,6 +7,6 @@ import Layout from "@/layouts/layout.astro";
 
 <Layout>
     <Content title="Que hacemos?" label="SERVICIOS">
-        
+        <ServiceList client:load/>
     </Content>
 </Layout>

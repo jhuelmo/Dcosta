@@ -1,63 +1,60 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import {
     motion,
-    useInView,
     useScroll,
     useTransform,
-    useMotionValueEvent,
-    useMotionValue,
 } from "motion/react";
-import { FloatingImage } from "./FloatingImage";
 import { TriadElement } from "./TriadElement";
 import { TriadIntro } from "./TriadIntro";
 import { StickyBlock } from "../ui/stickyBlock";
 
 const Triad = () => {
     const ref = useRef(null);
-    const { scrollY } = useScroll();
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        console.log("Scroll Y: ", latest);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start 35%", "end start"],
     });
 
     const top = useTransform(
-        scrollY,
-        [2290, 2520, 3500, 4250],
+        scrollYProgress,
+        [0.45, 0.52, 0.80, 1],
         ["100%", "0%", "0%", "-100%"],
     );
+    
     const textColor = useTransform(
-        scrollY,
-        [2420, 2430],
+        scrollYProgress,
+        [0.50, 0.52],
         ["var(--color-textColor)", "var(--color-primary-contrast)"],
     );
 
     return (
         <section ref={ref} className="bg-white">
-            <TriadIntro scrollY={scrollY} />
+            <TriadIntro scrollYProgress={scrollYProgress} />
 
             {/* 2800 appear */}
-            <main className="relative h-[220vh] ">
+            <main className="relative h-[160vh] mb-[30vh]">
                 <StickyBlock className="pt-[35vh]">
                     <ul className="flex flex-col gap-5 items-center text-white">
                         <TriadElement
                             className="font-light z-100"
-                            scrollY={scrollY}
-                            frameStart={1500}
+                            scrollYProgress={scrollYProgress}
+                            frameStart={0.50}
                             style={{ color: textColor as any }}
                         >
                             INNOVACION
                         </TriadElement>
                         <TriadElement
                             className="font-medium z-100 !color-primary-foreground"
-                            scrollY={scrollY}
-                            frameStart={2350}
+                            scrollYProgress={scrollYProgress}
+                            frameStart={0.58}
                         >
                             TRATO HUMANO
                         </TriadElement>
                         <TriadElement
                             className="font-black z-100 !color-primary-foreground"
-                            scrollY={scrollY}
-                            frameStart={2800}
+                            scrollYProgress={scrollYProgress}
+                            frameStart={0.66}
                         >
                             CAPACIDAD RESOLUTIVA
                         </TriadElement>

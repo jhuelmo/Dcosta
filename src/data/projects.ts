@@ -1,0 +1,47 @@
+import service1 from "@/assets/Services/Service-1.jpg";
+import service2 from "@/assets/Services/Service-2.jpg";
+import service3 from "@/assets/Services/Service-3.jpg";
+import type { Project } from "@/types/project";
+
+export const projects: Project[] = [
+  {
+    slug: "corona-1",
+    title: "Corona 1",
+    info: {
+      campo: "Prostodoncia",
+      cliente: "Clínica Dental",
+      tecnologia: ["Zirconio", "CAD/CAM"],
+    },
+    image: service1.src,
+  },
+  {
+    slug: "implante-1",
+    title: "Implante 1",
+    info: {
+      campo: "Implantología",
+      cliente: "Centro Odontológico",
+      tecnologia: ["Zirconio", "Implantología"],
+    },
+    image: service2.src,
+  },
+  {
+    slug: "corona-2",
+    title: "Corona 2",
+    info: {
+      campo: "Prostodoncia",
+      cliente: "Consultorio Privado",
+      tecnologia: ["Zirconio"],
+    },
+    image: service3.src,
+  },
+  {
+    slug: "implante-2",
+    title: "Implante 2",
+    info: {
+      campo: "Implantología",
+      cliente: "Clínica Premium",
+      tecnologia: ["Titanio", "CAD/CAM"],
+    },
+    image: service1.src,
+  },
+];

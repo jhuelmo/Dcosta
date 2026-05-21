@@ -1,5 +1,4 @@
 import heroPlaceholder from "src/assets/hero-placeholder.png";
-import logoPlaceholder from "../assets/logo-placeholder.png";
 import service1 from "../assets/Services/Service-1.jpg";
 import service2 from "../assets/Services/Service-2.jpg";
 import service3 from "../assets/Services/Service-3.jpg";
@@ -55,10 +54,13 @@ const Works = () => {
                                 >
                                     <div className="p-1">
                                         <Card>
-                                            <CardContent className="flex aspect-square items-center justify-center p-6">
-                                                <span className="text-4xl font-semibold">
-                                                    {image.alt}
-                                                </span>
+                                            <CardContent className="flex aspect-square items-center justify-center p-0 overflow-hidden">
+                                                <img
+                                                    src={image.src}
+                                                    alt={image.alt}
+                                                    loading="lazy"
+                                                    className="w-full h-full object-cover"
+                                                />
                                             </CardContent>
                                         </Card>
                                     </div>

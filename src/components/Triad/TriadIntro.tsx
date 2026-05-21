@@ -10,10 +10,10 @@ import { useRef } from "react";
 import { StickyBlock } from "../ui/stickyBlock";
 
 interface TriadIntroProps {
-    scrollY: MotionValue<number>;
+    scrollYProgress: MotionValue<number>;
 }
 
-export const TriadIntro = ({ scrollY }: TriadIntroProps) => {
+export const TriadIntro = ({ scrollYProgress}: TriadIntroProps) => {
     const h2Ref = useRef<HTMLHeadingElement>(null);
     const anchorX = useMotionValue(0);
     const anchorY = useMotionValue(0);
@@ -45,9 +45,9 @@ export const TriadIntro = ({ scrollY }: TriadIntroProps) => {
         },
     ];
 
-    const scale = useTransform(scrollY, [700, 2300], [2, 0.01]);
+    const scale = useTransform(scrollYProgress, [0.1, 0.45], [2, 0.01]);
 
-    useMotionValueEvent(scrollY, "change", () => {
+    useMotionValueEvent(scrollYProgress, "change", () => {
         if (!h2Ref.current) return;
         const rect = h2Ref.current.getBoundingClientRect();
         anchorX.set(rect.left + rect.width / 2);
@@ -75,7 +75,7 @@ export const TriadIntro = ({ scrollY }: TriadIntroProps) => {
                     className={image.className}
                     anchor={{ anchorX, anchorY }}
                     startPoint={image.startPoint}
-                    scrollY={scrollY}
+                    scrollYProgress={scrollYProgress}
                     offset={image.offset}
                 />
             ))}

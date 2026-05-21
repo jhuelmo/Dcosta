@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
+import { type Service } from "./servicesData";
 
-const ServiceCard = ({ service }) => {
+interface ServiceCardProps {
+    service: Service;
+}
+
+const ServiceCard = ({ service }: ServiceCardProps) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <motion.div
-            className="relative rounded-3xl o cursor-pointer border border-gray-200"
+        <motion.a
+            href={`/services/${service.slug}`}
+            className="relative rounded-3xl o cursor-pointer border border-gray-200 block"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             initial={{ opacity: 0, y: 20 }}
@@ -101,7 +107,7 @@ const ServiceCard = ({ service }) => {
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </motion.a>
     );
 };
 

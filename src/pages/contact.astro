@@ -2,52 +2,75 @@
 import Layout from "@/layouts/layout.astro";
 import Main from "@/layouts/main.astro";
 import { ContactForm } from "@/components/ContactForm/contactForm";
-import { Mail, Phone } from "lucide-react";
 import Whatsapp from "@/components/ui/whatsapp";
+import { MapPin, Clock, Phone, Mail } from "lucide-react";
+import Content from "@/layouts/content.astro";
+
+interface ContactInfo {
+    address?: string;
+    phone?: string;
+    whatsapp?: string;
+    email?: string;
+    schedule?: string;
+}
+
+interface Props{
+  info?: ContactInfo;
+}
+
+const {
+  info = {
+    address: "382 NE 191st St, Miami",
+    phone: "+1 234 567 890",
+    whatsapp: "+1 234 567 890",
+    email: "info@dacostalabs.com",
+    schedule: "Lun–Vie 8:00–18:00 · Sáb 9:00–13:00",
+
+  } 
+} = Astro.props;
+
+const contactRows = [
+    { icon: MapPin,   label: "Dirección", value: info.address,  show: !!info.address  },
+    { icon: Phone,    label: "Teléfono",  value: info.phone,    show: !!info.phone    },
+    { icon: Whatsapp, label: "Whatsapp",  value: info.whatsapp, show: !!info.whatsapp },
+    { icon: Mail,     label: "Email",     value: info.email,    show: !!info.email    },
+    { icon: Clock,    label: "Horario",   value: info.schedule, show: !!info.schedule },
+].filter((r) => r.show);
 ---
 
 <Layout>
-  <Main>
-    <section class="flex flex-col items-start bg-surface/30p p-4 ">
-      <div class="flex flex-col gap-8 items-start bg-linear-to-b from-primary-light/20 to-transparent py-40 px-12 w-full rounded-3xl">
-        <span class="text-sm border border-primary/50 rounded-full px-2 py-1 tracking-widest">CONTACTANOS</span>
-        <div class="w-full flex gap-40 items-stretch">
-          <div class="text-left w-full flex flex-col">
-            <h1 class="main-title font-bold text-primary/70 mb-2"><b class="text-primary">H</b>az que pase</h1>
-            <p class="text-xl">
-              Hagamos algo increible juntos
-            </p>
-            <p class="text-xl">
-              Hagamos algo que marque la<b
-                class="text-primary font-extrabold font-headings tracking-wider"> DIFERENCIA</b
-              >!
-            </p>
-            <div class="grid grid-cols-3 h-full py-4 items-center gap-12 mt-4">
-              <div class="flex flex-col rounded-3xl h-full bg-primary-light/5 p-8 items-start gap-2">
-                <span class="flex gap-4 text-lg font-bold"><Whatsapp /> HABLANOS</span>
-                <span class="text-primary/70">+1 234 567 890</span>
+  <Content title="Haz que pase" label="CONTACTO" >
+    <section class="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 pb-20 items-start">
+        <div>
+  
+          {[
+            { icon: MapPin,   label: "Dirección", value: "382 NE 191st St, Miami" },
+            { icon: Phone,    label: "Teléfono",  value: "+1 234 567 890"         },
+            { icon: Whatsapp, label: "Whatsapp",  value: "+1 234 567 890"         },
+            { icon: Mail,     label: "Email",     value: "info@dacostalabs.com"   },
+            { icon: Clock,    label: "Horario",   value: "Lun–Vie 8:00–18:00 · Sáb 9:00–13:00" },
+          ].map(({ icon: Icon, label, value }) => (
+            <div class="flex items-start gap-4 py-4">
+                <Icon className="w-6 h-6 text-primary/60" />
+              <div>
+                <p class="font-headings text-lg font-semibold tracking-[.12em] uppercase text-textColor mb-1">
+                  {label}
+                </p>
+                <p class="text-textColor/50">{value}</p>
               </div>
-              <div class="flex flex-col rounded-3xl h-full bg-primary-light/5 p-8 items-start gap-2">
-                <span class="flex gap-4 text-lg font-bold"><Phone /> LLAMANOS</span>
-                <span class="text-primary/70">+1 234 567 890</span>
-              </div>
-              <div class="flex flex-col rounded-3xl h-full bg-primary-light/5 p-8 items-start gap-2">
-                <span class="flex gap-4 text-lg font-bold"><Mail /> ESCRÍBENOS</span>
-                <span class="text-primary/70">info@dacosta.com</span>
-              </div>
-
-            </div>  
-          </div>
-          <div class="flex flex-col md:flex-row gap-8 w-full justify-center items-stretch">
-            <div
-              class="rounded-3xl flex-1 h-full"
-            >
-              <ContactForm />
             </div>
-            <!-- <ContactForm className="bg-primary text-primary-foreground" /> -->
-          </div>
+          ))}
         </div>
-      </div>
+  
+        <!-- Right: form card -->
+        <div class="bg-primary-light/10 rounded-2xl p-8">
+
+          <p class="font-headings text-xl font-medium text-primary mb-8">
+            Cuéntanos tu proyecto
+          </p>
+          <ContactForm client:load />
+        </div>
+
     </section>
   </Main>
 </Layout>

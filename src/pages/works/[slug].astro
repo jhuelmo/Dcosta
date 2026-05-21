@@ -7,52 +7,9 @@ import service3 from "@/assets/Services/Service-3.jpg";
 import { WorkInfo } from "@/components/layouts/Works/workInfo";
 import { Divider } from "@/components/ui/divider";
 import { Gallery } from "@/components/layouts/Gallery";
-import type { Project } from "@/types/project";
+import { projects } from "@/data/projects";
 
 export function getStaticPaths() {
-  const projects: Project[] = [
-    {
-      slug: "corona-1",
-      title: "Corona 1",
-      info: {
-        campo: "Prostodoncia",
-        cliente: "Clínica Dental",
-        tecnologia: ["Zirconio", "CAD/CAM"],
-      },
-      image: service1.src,
-    },
-    {
-      slug: "implante-1",
-      title: "Implante 1",
-      info: {
-        campo: "Implantología",
-        cliente: "Centro Odontológico",
-        tecnologia: ["Zirconio", "Implantología"],
-      },
-      image: service2.src,
-    },
-    {
-      slug: "corona-2",
-      title: "Corona 2",
-      info: {
-        campo: "Prostodoncia",
-        cliente: "Consultorio Privado",
-        tecnologia: ["Zirconio"],
-      },
-      image: service3.src,
-    },
-    {
-      slug: "implante-2",
-      title: "Implante 2",
-      info: {
-        campo: "Implantología",
-        cliente: "Clínica Premium",
-        tecnologia: ["Titanio", "CAD/CAM"],
-      },
-      image: service1.src,
-    },
-  ];
-
   return projects.map((project) => ({
     params: { slug: project.slug },
     props: { project },
