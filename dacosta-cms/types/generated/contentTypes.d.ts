@@ -485,6 +485,45 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiServiceService extends Struct.CollectionTypeSchema {
+  collectionName: 'services';
+  info: {
+    displayName: 'Service';
+    pluralName: 'services';
+    singularName: 'service';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      ['sections.rich-text', 'sections.image', 'sections.gallery']
+    >;
+    category: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    extraText: Schema.Attribute.String;
+    heroImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    icon: Schema.Attribute.Enumeration<
+      ['wrench', 'settings', 'zap', 'heart', 'star', 'shield']
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service.service'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -998,6 +1037,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
+      'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -9,10 +9,11 @@
   ],
   "compilerOptions": {
     "strictNullChecks": true,
-	"strict": true,
+    "strict": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
+    "types": [],
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],

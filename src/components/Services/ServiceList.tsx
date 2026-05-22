@@ -1,9 +1,20 @@
+import { getServices } from "@/lib/strapi/strapi.ts";
 import ServicePageCard from "./ServicePageCard";
-import { services } from "./servicesData.ts";
-import { useRef } from "react";
+
+import { useEffect, useState } from "react";
+import type { Service } from "@/lib/strapi/types.ts";
+
+
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL;
 
 export default function ServiceList() {
-    const scrollRef = useRef(null);
+
+    const [services, setServices] = useState<Service[]>([]);
+
+     useEffect(() => {
+        getServices().then(setServices);
+    }, []);
+  
     return (
         <section className="flex flex-col gap-4  min-h-screen" >
         <div 
@@ -11,12 +22,13 @@ export default function ServiceList() {
         >
             {services.map((service, index) => (
             <ServicePageCard
-                key={service.id}
+                key={service.documentId}
                 index={index}
                 title={service.title}
                 icon={service.icon}
                 description={service.description}
-                imageUrl={service.image}
+                imageUrl={`${STRAPI_URL}${service.heroImage?.url}`}
+                imageAlt={service.heroImage?.alternativeText ?? service.title}
                 slug={service.slug}
             />
             ))}

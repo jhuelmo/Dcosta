@@ -1,5 +1,18 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SectionsGallery extends Struct.ComponentSchema {
+  collectionName: 'components_sections_galleries';
+  info: {
+    displayName: 'Gallery';
+  };
+  attributes: {
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+  };
+}
+
 export interface SectionsHero extends Struct.ComponentSchema {
   collectionName: 'components_sections_heroes';
   info: {
@@ -11,6 +24,27 @@ export interface SectionsHero extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface SectionsImage extends Struct.ComponentSchema {
+  collectionName: 'components_sections_images';
+  info: {
+    displayName: 'Image';
+  };
+  attributes: {
+    caption: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface SectionsRichText extends Struct.ComponentSchema {
+  collectionName: 'components_sections_rich_texts';
+  info: {
+    displayName: 'RichText';
+  };
+  attributes: {
+    content: Schema.Attribute.Text;
   };
 }
 
@@ -44,7 +78,10 @@ export interface SharedSeo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'sections.gallery': SectionsGallery;
       'sections.hero': SectionsHero;
+      'sections.image': SectionsImage;
+      'sections.rich-text': SectionsRichText;
       'sections.triad': SectionsTriad;
       'shared.seo': SharedSeo;
     }

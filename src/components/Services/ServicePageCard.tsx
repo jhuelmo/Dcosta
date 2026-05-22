@@ -1,3 +1,4 @@
+import { getIcon } from "@/lib/strapi/icons";
 import { ArrowRight, type LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
 
@@ -31,24 +32,27 @@ const imageVariants = {
 };
 
 interface ServicePageCardProps {
-  icon: LucideIcon;
   title: string;
+  icon: string;
   description: string;
   imageUrl: string;
   index: number;
   slug: string;
   imageAlt?: string;
+  
 }
 
 export default function ServicePageCard({
-  icon: Icon,
   title,
+  icon,
   description,
   imageUrl,
   index,
   imageAlt = "",
   slug,
 }: ServicePageCardProps) {
+  const Icon = getIcon(icon);
+  
   return (
     <motion.div
       className="flex items-center gap-6 bg-white rounded-2xl p-6 shadow-xs"

@@ -1,6 +1,6 @@
 import { motion, MotionValue, useTransform } from "motion/react";
 import { useState, useEffect } from "react";
-import Triad1 from "../../assets/Services/Service-1.jpg";
+import Triad1 from "../../assets/Services/Service-1.png";
 
 interface Props {
     anchor: {

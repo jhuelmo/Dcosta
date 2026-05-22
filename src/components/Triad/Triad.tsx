@@ -7,7 +7,7 @@ import {
 import { TriadElement } from "./TriadElement";
 import { TriadIntro } from "./TriadIntro";
 import { StickyBlock } from "../ui/stickyBlock";
-import type { TriadData } from "@/lib/strapi";
+import type { TriadData } from "@/lib/strapi/strapi";
 
 const Triad = ({slogan, triad1, triad2, triad3}: TriadData) => {
     const ref = useRef(null);

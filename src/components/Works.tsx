@@ -1,5 +1,5 @@
 import heroPlaceholder from "src/assets/hero-placeholder.png";
-import service1 from "../assets/Services/Service-1.jpg";
+import service1 from "../assets/Services/Service-1.png";
 import service2 from "../assets/Services/Service-2.jpg";
 import service3 from "../assets/Services/Service-3.jpg";
 import { motion } from "motion/react";

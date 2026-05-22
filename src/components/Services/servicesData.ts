@@ -1,5 +1,5 @@
 import { type LucideIcon, Wrench, Settings, Zap } from "lucide-react";
-import serviceImage1 from '../../assets/Services/Service-1.jpg';
+import serviceImage1 from '../../assets/Services/Service-1.png';
 import serviceImage2 from '../../assets/Services/Service-2.jpg';
 import serviceImage3 from '../../assets/Services/Service-3.jpg';
 
