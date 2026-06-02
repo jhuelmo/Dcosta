@@ -2,8 +2,8 @@
 FROM node:20-bookworm-slim AS deps
 RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-COPY package.json pnpm-lock.yaml* ./
-RUN corepack enable && pnpm install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Stage 2: build admin panel
 FROM node:20-bookworm-slim AS builder
