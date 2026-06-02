@@ -14,6 +14,8 @@ COPY . .
 RUN node_modules/.bin/tsc --noEmitOnError false
 # Build admin panel → dist/build/
 RUN node_modules/.bin/strapi build
+# Copy admin build to where strapi start expects it in production
+RUN cp -r dist/build node_modules/@strapi/admin/dist/server/server/build
 
 # Stage 3: production image
 # strapi start only loads .js/.json — copy compiled JS from dist/config/ into config/
@@ -28,5 +30,6 @@ COPY --from=builder /app/dist/config ./config
 COPY --from=builder /app/dist/src ./src
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/database ./database
+COPY --from=builder /app/favicon.png ./favicon.png
 EXPOSE 1337
 CMD ["node_modules/.bin/strapi", "start"]
