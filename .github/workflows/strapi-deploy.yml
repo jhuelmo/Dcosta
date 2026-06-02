@@ -36,14 +36,16 @@ jobs:
   deploy:
     needs: build
     runs-on: self-hosted
+    permissions:
+      packages: read
 
     steps:
       - name: Pull and restart Strapi
         env:
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_OWNER: ${{ github.repository_owner }}
         run: |
-          echo "$GHCR_TOKEN" | docker login ghcr.io -u "$REPO_OWNER" --password-stdin
+          echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$REPO_OWNER" --password-stdin
           docker pull "ghcr.io/$REPO_OWNER/dacosta-cms:latest"
           cd /opt/dacosta
           docker compose up -d --no-deps strapi
