@@ -5,11 +5,14 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Stage 2: build admin panel
+# Stage 2: compile TypeScript + build admin panel
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Compile server-side TypeScript (config/, src/) to dist/
+RUN node_modules/.bin/tsc --noEmitOnError false
+# Build admin panel (outputs to dist/build/)
 RUN node_modules/.bin/strapi build
 
 # Stage 3: production image
@@ -20,8 +23,7 @@ ENV NODE_ENV=production
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/config ./config
-COPY --from=builder /app/src ./src
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/database ./database
 EXPOSE 1337
 CMD ["node_modules/.bin/strapi", "start"]
