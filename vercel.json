@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "dist",
+  "framework": "astro",
+  "ignoreCommand": "[ -z \"$(git diff HEAD^ HEAD --name-only | grep -vE '^dacosta-cms/')\" ]"
+}

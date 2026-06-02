@@ -4,7 +4,9 @@ import type { GlobalData, HomeData, Service } from './types';
 const STRAPI_URL = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
 const STRAPI_TOKEN = import.meta.env.STRAPI_TOKEN;
 
-
+const authHeaders: HeadersInit = STRAPI_TOKEN
+  ? { Authorization: `Bearer ${STRAPI_TOKEN}` }
+  : {};
 
 const QUERY_HOME_PAGE ={
   populate: {
@@ -51,7 +53,7 @@ export const QUERY_SERVICES = {
 
 export async function getStrapiData<T>(url: string): Promise<T> {
   try{
-    const response = await fetch(`${STRAPI_URL}${url}`);
+    const response = await fetch(`${STRAPI_URL}${url}`, { headers: authHeaders });
     if(!response.ok){
       throw new Error(`Failed to fetch data from Strapi: ${response.statusText}`);
     }
@@ -78,7 +80,7 @@ export async function getHome(): Promise<HomeData> {
 
 export async function getServices(): Promise<Service[]> {
   const query = qs.stringify(QUERY_SERVICES);
-  const res = await fetch(`${STRAPI_URL}/api/services?${query}`);
+  const res = await fetch(`${STRAPI_URL}/api/services?${query}`, { headers: authHeaders });
   const { data } = await res.json();
   return data.map((item: any) => ({ ...item }));
 }
@@ -88,7 +90,7 @@ export async function getServiceBySlug(slug: string): Promise<Service> {
     ...QUERY_SERVICES,
     filters: { slug: { $eq: slug } },
   });
-  const res = await fetch(`${STRAPI_URL}/api/services?${query}`);
+  const res = await fetch(`${STRAPI_URL}/api/services?${query}`, { headers: authHeaders });
   const { data } = await res.json();
   return { ...data[0] };
 }

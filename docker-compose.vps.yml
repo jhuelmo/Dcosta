@@ -1,0 +1,39 @@
+# Colocar en el VPS en: /opt/dacosta/docker-compose.yml
+# Crear también /opt/dacosta/.env con las variables de producción (ver .env.example de dacosta-cms)
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  strapi:
+    image: ghcr.io/jhuelmo/dacosta-cms:latest
+    depends_on:
+      - postgres
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      DATABASE_CLIENT: postgres
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+    ports:
+      - "1337:1337"
+    volumes:
+      - strapi_uploads:/app/public/uploads
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  strapi_uploads:

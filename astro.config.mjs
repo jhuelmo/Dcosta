@@ -14,7 +14,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://example.com",
+    site: process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : (process.env.PUBLIC_SITE_URL ?? "https://dcosta-tau.vercel.app"),
     integrations: [mdx(), sitemap(), react()],
 
     devToolbar: {
