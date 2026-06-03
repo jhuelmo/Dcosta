@@ -1,7 +1,7 @@
 import qs from 'qs';
 import type { GlobalData, HomeData, Service } from './types';
 
-const STRAPI_URL = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL ?? import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
 const STRAPI_TOKEN = import.meta.env.STRAPI_TOKEN;
 
 const authHeaders: HeadersInit = STRAPI_TOKEN
