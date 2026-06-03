@@ -61,7 +61,7 @@ export async function getStrapiData<T>(url: string): Promise<T> {
     return data.data as T;
   }catch(error){
     console.error("Error fetching data from Strapi: ", error);
-    throw `Error fetching data from Strapi: ${STRAPI_URL}/api${url}`;
+    throw `Error fetching data from Strapi: ${STRAPI_URL}${url}`;
   }
 }
 
