@@ -17,9 +17,7 @@ export default function ServiceList() {
   
     return (
         <section className="flex flex-col gap-4  min-h-screen" >
-        <div 
-            className="flex flex-col gap-8"
-        >
+        <div className="flex flex-col gap-8">
             {services.map((service, index) => (
             <ServicePageCard
                 key={service.documentId}
