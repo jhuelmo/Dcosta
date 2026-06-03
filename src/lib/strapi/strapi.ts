@@ -82,7 +82,7 @@ export async function getServices(): Promise<Service[]> {
   const query = qs.stringify(QUERY_SERVICES);
   const res = await fetch(`${STRAPI_URL}/api/services?${query}`, { headers: authHeaders });
   const { data } = await res.json();
-  return data.map((item: any) => ({ ...item }));
+  return (data ?? []).map((item: any) => ({ ...item }));
 }
 
 export async function getServiceBySlug(slug: string): Promise<Service> {
