@@ -1,5 +1,6 @@
 ---
-import { Button } from "./ui/button";
+import HeroContent from "./HeroContent";
+import HeroImage from "./HeroImage";
 
 interface Props {
   heroH1: string;
@@ -13,24 +14,26 @@ const { heroH1, subtitle, ctaText, ctaUrl, imageUrl } = Astro.props;
 const STRAPI_URL = import.meta.env.STRAPI_URL ?? "http://localhost:1337";
 ---
 
-<div class="h-screen flex-col items-center justify-center p-4 text-center">
-  <div class="img-wrapper relative w-full h-full rounded-3xl overflow-hidden">
-    <img 
-      class="object-cover" 
-      src={`${STRAPI_URL}${imageUrl}`} 
-      alt="D'acosta labs" 
-      loading="eager" />
+<div class="relative h-screen w-full">
+  <div class="img-wrapper absolute inset-0 rounded-b-2xl lg:rounded-b-3xl overflow-hidden">
+    <!-- parallax-track mueve la imagen más despacio que el scroll -->
+    <div class="parallax-track">
+      <HeroImage
+        src={`${STRAPI_URL}${imageUrl}`}
+        alt="D'acosta labs"
+        client:load
+      />
+    </div>
   </div>
-  <div
-    class="absolute flex flex-col items-start left-0 bottom-0 pl-24 py-20 z-100 max-w-[60%] gap-4"
-  >
-    <h1 class="main-title text-neutral">{heroH1}</h1>
-    <span class="text-neutral-100 text-left text-shadow-2xs max-w-xl"
-      >{subtitle}</span
-    >
-    <Button className="font-semibold" variant="accent" size="xl">
-      {ctaText}
-    </Button>
+
+  <div class="absolute bottom-20 left-6 lg:bottom-28 lg:left-20 z-100 max-w-[88%] lg:max-w-[50%]">
+    <HeroContent
+      heroH1={heroH1}
+      subtitle={subtitle}
+      ctaText={ctaText}
+      ctaUrl={ctaUrl}
+      client:load
+    />
   </div>
 </div>
 
@@ -39,8 +42,42 @@ const STRAPI_URL = import.meta.env.STRAPI_URL ?? "http://localhost:1337";
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+    background: rgba(0, 0, 0, 0.32);
     z-index: 10;
-    border-radius: 1.5rem;
+    border-radius: inherit;
+  }
+
+  /* Capa de parallax: más alta que el viewport para que no queden huecos al desplazarse */
+  .parallax-track {
+    position: absolute;
+    inset: -25% 0;
+    width: 100%;
+  }
+
+  /* Scroll-driven animation: la pista baja un 25% mientras el hero
+     recorre 100vh de scroll → la imagen parece casi quieta */
+  @supports (animation-timeline: scroll()) {
+    .parallax-track {
+      animation: parallax-move linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+
+  @keyframes parallax-move {
+    from { transform: translateY(0%); }
+    to   { transform: translateY(25%); }
+  }
+
+  /* Breathing: en HeroImage.tsx el img tiene clase hero-img */
+  :global(.hero-img) {
+    animation: breathing 22s ease-in-out infinite;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  @keyframes breathing {
+    0%, 100% { transform: scale(1);    }
+    50%       { transform: scale(1.07); }
   }
 </style>

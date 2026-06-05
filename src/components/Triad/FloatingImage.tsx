@@ -42,9 +42,13 @@ export const FloatingImage = ({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    const isMobile = viewportDims.width < 1024;
+
+    // En móvil los startPoints son más extremos para garantizar que salgan de fuera de pantalla
+    const startMultiplier = isMobile ? 1.8 : 1;
     const normalizedStartPoint = {
-        x: (startPoint.x / 100) * viewportDims.width,
-        y: (startPoint.y / 100) * viewportDims.height,
+        x: (startPoint.x / 100) * viewportDims.width * startMultiplier,
+        y: (startPoint.y / 100) * viewportDims.height * startMultiplier,
     };
 
     const progress = useTransform(
@@ -52,6 +56,8 @@ export const FloatingImage = ({
         [0.05, 0.30, 0.35, 0.45],
         [0, 0.7, 0.9, 1],
     );
+
+    const opacity = useTransform(scrollYProgress, [0, 0.04, 0.06], [0, 0, 1]);
 
     const finalX = useTransform(
         [progress, anchorX],
@@ -76,6 +82,8 @@ export const FloatingImage = ({
                 y: finalY,
                 translateX: "-50%",
                 translateY: "-50%",
+                opacity,
+                scale: isMobile ? 0.5 : 1,
             }}
         >
             <div className={`${className} rounded-3xl overflow-hidden`}>

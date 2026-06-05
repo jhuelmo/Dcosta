@@ -58,10 +58,10 @@ export const TriadIntro = ({ text, scrollYProgress}: TriadIntroProps) => {
     return (
         <header className="relative h-[200vh] mb-[-40vh]">
             <StickyBlock>
-                <div className="h-full flex justify-center items-center text-center overflow-hidden">
+                <div className="relative h-full flex justify-center items-center text-center overflow-hidden">
                     <motion.h2
                         ref={h2Ref}
-                        className="relative leading-25 font-medium font-body! tracking-tighter text-9xl max-w-3xl"
+                        className="relative font-medium font-body! tracking-tighter text-3xl leading-tight max-w-[260px] sm:text-4xl sm:max-w-sm md:text-5xl md:max-w-lg lg:text-9xl lg:leading-25 lg:max-w-3xl px-4 lg:px-0"
                         style={{
                             scale,
                         }}
