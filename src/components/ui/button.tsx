@@ -1,6 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui";
+import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -65,4 +67,95 @@ function Button({
     );
 }
 
-export { Button, buttonVariants };
+/* ── LetterButton ────────────────────────────────────────────────────
+ * En hover cada letra sale hacia arriba y vuelve desde abajo.
+ * clip-path: inset(0) garantiza el recorte aunque overflow-hidden
+ * no clipee CSS transforms en algunos navegadores.
+ * ------------------------------------------------------------------ */
+interface LetterButtonProps
+    extends Omit<React.ComponentProps<"button">, "children">,
+        VariantProps<typeof buttonVariants> {
+    children: string;
+    isHovered?: boolean;
+}
+
+function LetterButton({
+    children,
+    className,
+    variant = "default",
+    size = "default",
+    isHovered: externalHovered,
+    ...props
+}: LetterButtonProps) {
+    const [internalHovered, setInternalHovered] = useState(false);
+    const hovered = externalHovered ?? internalHovered;
+    const letters = children.split("");
+
+    const transition = (i: number) => ({
+        duration: 0.38,
+        delay: i * 0.028,
+        ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number],
+    });
+
+    const layerStyle: React.CSSProperties = {
+        clipPath: "inset(0)",
+        height: "1em",
+        marginBlock: "auto",
+    };
+
+    return (
+        <button
+            data-slot="button"
+            className={cn(
+                buttonVariants({ variant, size }),
+                "relative overflow-hidden",
+                className,
+            )}
+            onMouseEnter={() => setInternalHovered(true)}
+            onMouseLeave={() => setInternalHovered(false)}
+            {...props}
+        >
+            {/* Spacer: mantiene el tamaño natural del botón */}
+            <span className="invisible flex" aria-hidden>
+                {children}
+            </span>
+
+            {/* Capa 1: sale hacia arriba en hover */}
+            <span
+                className="absolute inset-0 flex items-center justify-center"
+                style={layerStyle}
+            >
+                {letters.map((char, i) => (
+                    <motion.span
+                        key={i}
+                        className="inline-block"
+                        animate={{ y: hovered ? "-110%" : "0%" }}
+                        transition={transition(i)}
+                    >
+                        {char === " " ? " " : char}
+                    </motion.span>
+                ))}
+            </span>
+
+            {/* Capa 2: entra desde abajo en hover */}
+            <span
+                className="absolute inset-0 flex items-center justify-center"
+                style={layerStyle}
+                aria-label={children}
+            >
+                {letters.map((char, i) => (
+                    <motion.span
+                        key={i}
+                        className="inline-block"
+                        animate={{ y: hovered ? "0%" : "110%" }}
+                        transition={transition(i)}
+                    >
+                        {char === " " ? " " : char}
+                    </motion.span>
+                ))}
+            </span>
+        </button>
+    );
+}
+
+export { Button, buttonVariants, LetterButton };
