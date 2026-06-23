@@ -1,5 +1,5 @@
 import qs from 'qs';
-import type { GlobalData, HomeData, Service, Work, DocPageData } from './types';
+import type { GlobalData, HomeData, Service, Work, DocPageData, Post } from './types';
 
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL ?? import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
 const STRAPI_TOKEN = import.meta.env.STRAPI_TOKEN;
@@ -71,6 +71,36 @@ export const QUERY_DOC_PAGE = {
       populate: "*",
     },
   },
+};
+
+export const QUERY_POSTS = {
+  populate: {
+    heroImage: {
+      populate: "*",
+    },
+    body: {
+      on: {
+        "sections.rich-text": {
+          populate: "*",
+        },
+        "sections.image": {
+          populate: {
+            image: {
+              populate: "*",
+            },
+          },
+        },
+        "sections.gallery": {
+          populate: {
+            images: {
+              populate: "*",
+            },
+          },
+        },
+      },
+    },
+  },
+  sort: ["publishedAt:desc"],
 };
 
 export async function getStrapiData<T>(url: string): Promise<T> {
@@ -147,4 +177,21 @@ export async function getFaq(): Promise<DocPageData> {
 export async function getCookie(): Promise<DocPageData> {
   const query = qs.stringify(QUERY_DOC_PAGE);
   return getStrapiData<DocPageData>(`/api/cookie?${query}`);
+}
+
+export async function getPosts(): Promise<Post[]> {
+  const query = qs.stringify(QUERY_POSTS);
+  const res = await fetch(`${STRAPI_URL}/api/posts?${query}`, { headers: authHeaders });
+  const { data } = await res.json();
+  return (data ?? []).map((item: any) => ({ ...item }));
+}
+
+export async function getPostBySlug(slug: string): Promise<Post> {
+  const query = qs.stringify({
+    ...QUERY_POSTS,
+    filters: { slug: { $eq: slug } },
+  });
+  const res = await fetch(`${STRAPI_URL}/api/posts?${query}`, { headers: authHeaders });
+  const { data } = await res.json();
+  return { ...data[0] };
 }

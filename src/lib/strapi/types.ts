@@ -57,6 +57,21 @@ export interface Work {
 
 /////////////////
 
+// BLOG
+
+export interface Post {
+  documentId: string;
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  heroImage: StrapiImage;
+  body: Block[];
+  publishedAt: string;
+}
+
+/////////////////
+
 export interface SeoData {
   metaTitle: string;
   metaDescription: string;

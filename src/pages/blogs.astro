@@ -2,11 +2,13 @@
 import BlogPage from "@/components/layouts/Blogs/BlogPage";
 import Layout from "@/layouts/layout.astro";
 import Main from "@/layouts/main.astro";
+import { getPosts } from "@/lib/strapi/strapi";
 
+const posts = await getPosts();
 ---
 
 <Layout>
     <Main>
-		<BlogPage client:load />
+		<BlogPage client:load posts={posts} />
 	</Main>
 </Layout>
