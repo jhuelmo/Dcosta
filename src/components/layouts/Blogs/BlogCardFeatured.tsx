@@ -8,7 +8,7 @@ interface BlogCardFeaturedProps {
   imageUrl: string;
   imageAlt?: string;
   index?: number;
-  onReadMore?: () => void;
+  href: string;
 }
 
 const cardVariants = {
@@ -38,7 +38,7 @@ export default function BlogCardFeatured({
   imageUrl,
   imageAlt = "",
   index = 0,
-  onReadMore,
+  href,
 }: BlogCardFeaturedProps) {
   return (
     <motion.article
@@ -84,8 +84,8 @@ export default function BlogCardFeatured({
           </p>
         </div>
 
-        <motion.button
-          onClick={onReadMore}
+        <motion.a
+          href={href}
           className="flex items-center gap-4 w-fit rounded-full bg-accent px-2 py-2 pr-6 font-medium text-white hover:brightness-110 transition-all"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
@@ -94,7 +94,7 @@ export default function BlogCardFeatured({
             <ArrowRight className="w-4 h-4 text-accent" />
           </span>
           Read More
-        </motion.button>
+        </motion.a>
       </motion.div>
     </motion.article>
   );

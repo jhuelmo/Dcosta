@@ -1,10 +1,10 @@
 import BlogCard from "./BlogCard";
-import type { Post } from "./blogData";
+import type { BlogCardViewModel } from "./blogCardViewModel";
 
-export function BlogPostList({ posts }: { posts: Post[] }) {
+export function BlogPostList({ posts }: { posts: BlogCardViewModel[] }) {
     return (
         <div className="py-32 bg-primary-light/10">
-            <div className="container-xl flex gap-12">
+            <div className="container-xl px-4 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
 
                 {posts.map((post, index) => (
                 <BlogCard
@@ -15,7 +15,7 @@ export function BlogPostList({ posts }: { posts: Post[] }) {
                     date={post.date}
                     excerpt={post.excerpt}
                     imageUrl={post.imageUrl}
-                    onReadMore={() => console.log(`Read more: ${post.id}`)}
+                    href={post.href}
                 />
                 ))}
             </div>

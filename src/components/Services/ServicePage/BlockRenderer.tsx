@@ -6,6 +6,7 @@ import RichText from "./RickText";
 
 interface Props {
   blocks: Block[];
+  className?: string;
 }
 
 const map = {
@@ -14,9 +15,9 @@ const map = {
   "sections.gallery": Gallery,
 };
 
-export default function BlockRenderer({ blocks }: Props) {
+export default function BlockRenderer({ blocks, className = "container-text" }: Props) {
   return (
-    <div className="container-text flex flex-col gap-12 p-6">
+    <div className={`${className} flex flex-col gap-12 p-6`}>
       {blocks.map((block, i) => {
         const Component = map[block.__component] as any;
         return Component ? <Component key={i} {...block} /> : null;

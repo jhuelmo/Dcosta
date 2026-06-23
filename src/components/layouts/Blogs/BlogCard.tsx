@@ -8,7 +8,7 @@ interface BlogCardProps {
   imageUrl: string;
   imageAlt?: string;
   index?: number;
-  onReadMore?: () => void;
+  href: string;
 }
 
 const cardVariants = {
@@ -34,7 +34,7 @@ export default function BlogCard({
   imageUrl,
   imageAlt = "",
   index = 0,
-  onReadMore,
+  href,
 }: BlogCardProps) {
   return (
     <motion.article
@@ -43,7 +43,7 @@ export default function BlogCard({
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="flex flex-col gap-4 max-w-sm"
+      className="flex flex-col gap-4 w-full"
     >
       <motion.div
         variants={imageVariants}
@@ -77,8 +77,7 @@ export default function BlogCard({
         </p>
 
         <a
-            href="#"
-            onClick={onReadMore}
+            href={href}
             className="w-fit font-bold text-primary hover:text-accent transition-colors relative group"
         >
             Read More
