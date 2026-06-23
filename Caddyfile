@@ -1,0 +1,8 @@
+# Colocar en el VPS en: /opt/dacosta/Caddyfile
+# CMS_HOSTNAME se define en /opt/dacosta/.env, ej: 203.0.113.10.sslip.io
+# sslip.io resuelve ese hostname a la IP del VPS, asi Caddy puede emitir
+# un certificado Let's Encrypt valido sin necesitar un dominio propio.
+
+{$CMS_HOSTNAME} {
+	reverse_proxy strapi:1337
+}

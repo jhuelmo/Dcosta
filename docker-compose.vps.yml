@@ -1,5 +1,6 @@
 # Colocar en el VPS en: /opt/dacosta/docker-compose.yml
 # Crear también /opt/dacosta/.env con las variables de producción (ver .env.example de dacosta-cms)
+# y un /opt/dacosta/.env con CMS_HOSTNAME=<ip-con-puntos>.sslip.io (ver README de despliegue)
 
 services:
   postgres:
@@ -28,12 +29,27 @@ services:
       TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
       JWT_SECRET: ${JWT_SECRET}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-    ports:
-      - "1337:1337"
     volumes:
       - strapi_uploads:/app/public/uploads
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      - strapi
+    environment:
+      CMS_HOSTNAME: ${CMS_HOSTNAME}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
     restart: unless-stopped
 
 volumes:
   postgres_data:
   strapi_uploads:
+  caddy_data:
+  caddy_config:
