@@ -61,6 +61,30 @@ export interface SectionsTriad extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsWorks extends Struct.ComponentSchema {
+  collectionName: 'components_sections_works';
+  info: {
+    displayName: 'Works';
+  };
+  attributes: {
+    ctaText: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedDocSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_doc_sections';
+  info: {
+    displayName: 'Doc Section';
+  };
+  attributes: {
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+    sectionID: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
@@ -83,6 +107,8 @@ declare module '@strapi/strapi' {
       'sections.image': SectionsImage;
       'sections.rich-text': SectionsRichText;
       'sections.triad': SectionsTriad;
+      'sections.works': SectionsWorks;
+      'shared.doc-section': SharedDocSection;
       'shared.seo': SharedSeo;
     }
   }

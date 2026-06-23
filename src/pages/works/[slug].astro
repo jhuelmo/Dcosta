@@ -1,39 +1,40 @@
 ---
 import Layout from "@/layouts/layout.astro";
 import Work from "@/layouts/work.astro";
-import service1 from "@/assets/Services/Service-1.png";
-import service2 from "@/assets/Services/Service-2.jpg";
-import service3 from "@/assets/Services/Service-3.jpg";
 import { WorkInfo } from "@/components/layouts/Works/workInfo";
 import { Divider } from "@/components/ui/divider";
 import { Gallery } from "@/components/layouts/Gallery";
-import { projects } from "@/data/projects";
+import { getWorks } from "@/lib/strapi/strapi";
+import type { Work as WorkData } from "@/lib/strapi/types";
 
-export function getStaticPaths() {
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
+export async function getStaticPaths() {
+  const works = await getWorks();
+  return works.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
   }));
 }
 
-const galleryRows = [
-  [service1.src],
-  [service2.src, service3.src],
-  [service3.src],
-];
+const { work } = Astro.props as { work: WorkData };
+const STRAPI_URL =
+  import.meta.env.PUBLIC_STRAPI_URL ??
+  import.meta.env.STRAPI_URL ??
+  "http://localhost:1337";
 
-const { project } = Astro.props;
+const galleryRows = (work.gallery ?? []).map((image) => [
+  `${STRAPI_URL}${image.url}`,
+]);
 ---
 
 <Layout>
-  <Work title={project.title}>
+  <Work title={work.title}>
     <div class="flex w-full space-y-6">
-      <WorkInfo info={project.info} />
+      <WorkInfo work={work} />
       <div class="flex-3 flex flex-col gap-6">
         <div class="rounded-3xl overflow-hidden">
           <img
-            src={project.image}
-            alt={project.title}
+            src={`${STRAPI_URL}${work.heroImage?.url}`}
+            alt={work.title}
             class="object-cover aspect-16/10"
           />
         </div>
@@ -45,22 +46,23 @@ const { project } = Astro.props;
               Descripción
             </div>
             <h2 class="flex-1 text-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ex
-              purus. Suspendisse potenti. Sed elit dolor, ultricies eget lacinia
-              fringilla, ullamcorper a libero. Pellentesque nulla ex, pulvinar
-              ultrices finibus quis, lacinia sit amet ipsum
+              {work.description}
             </h2>
           </div>
 
-          <div class="flex flex-col box overflow-hidden mt-12">
-            <Divider />
-            <div class="flex flex-col">
-              <div class="flex-1 text-sm font-bold uppercase text-primary/50">
-                Galería
+          {
+            galleryRows.length > 0 && (
+              <div class="flex flex-col box overflow-hidden mt-12">
+                <Divider />
+                <div class="flex flex-col">
+                  <div class="flex-1 text-sm font-bold uppercase text-primary/50">
+                    Galería
+                  </div>
+                  <Gallery className="mt-12" rows={galleryRows} />
+                </div>
               </div>
-              <Gallery className="mt-12" rows={galleryRows} />
-            </div>
-          </div>
+            )
+          }
         </div>
       </div>
     </div>

@@ -1,0 +1,63 @@
+---
+import InfoLayout from "@/layouts/infoLayout.astro";
+import Layout from "@/layouts/layout.astro";
+import { TableOfContents, type TocItem } from "@/components/tableOfContents";
+
+interface Props {
+  title: string;
+  intro: string;
+  heading: string;
+  /** Si se omite, no se renderiza el menú lateral */
+  tocItems?: TocItem[];
+}
+
+const { title, intro, heading, tocItems } = Astro.props;
+---
+
+<Layout>
+	<InfoLayout>
+		<main class="bg-primary text-primary-foreground">
+			<section class="">
+				<div class="max-w-360 mx-auto px-12">
+					<div class="flex items-end justify-between h-[65vh] pb-15">
+						<h1 class="main-title font-headings text-left w-3xl">
+							{title}
+						</h1>
+						<p class="text-2xl font-bold leading-relaxed text-right w-lg text-primary-foreground/90 lg:justify-self-end">
+							{intro}
+						</p>
+					</div>
+				</div>
+
+				<div class="bg-neutral text-textColor m-4 rounded-3xl">
+					<div class="max-w-360 mx-auto px-6 lg:px-12">
+						{/*
+						 * 3 columnas: [gutter izq][columna de lectura centrada][gutter der]
+						 * h2 y article siempre van en la columna central (col-start-2),
+						 * así la zona de lectura queda centrada en la pantalla.
+						 * El menú (si existe) vive en la columna izquierda, pegado
+						 * al borde derecho de su columna (cerca del contenido).
+						 * row-start explícito evita que el auto-placement de grid
+						 * coloque el menú junto al título en la misma fila.
+						 */}
+						<div class="grid lg:grid-cols-[1fr_min(48rem,100%)_1fr] gap-y-10 lg:gap-x-16">
+							<h2 class="lg:col-start-2 lg:row-start-1 text-5xl md:text-7xl font-headings font-bold pt-30 pb-12">
+								{heading}
+							</h2>
+
+							{tocItems && (
+								<aside class="lg:col-start-1 lg:row-start-2 lg:sticky lg:top-32 self-start lg:justify-self-end">
+									<TableOfContents items={tocItems} client:load />
+								</aside>
+							)}
+
+							<article class="lg:col-start-2 lg:row-start-2 space-y-12 pb-20">
+								<slot />
+							</article>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</InfoLayout>
+</Layout>

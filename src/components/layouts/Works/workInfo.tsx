@@ -1,7 +1,7 @@
-import type { ProjectInfo } from "@/types/project";
+import type { Work } from "@/lib/strapi/types";
 
 interface WorkInfoProps {
-    info: ProjectInfo;
+    work: Work;
 }
 
 const InfoRow = ({
@@ -23,18 +23,13 @@ const InfoRow = ({
     );
 };
 
-export function WorkInfo({ info }: WorkInfoProps) {
+export function WorkInfo({ work }: WorkInfoProps) {
     return (
         <div className="flex-1 flex flex-col gap-6 h-full relative">
 			<div className="flex flex-col gap-6 sticky top-0 pt-[50vh]">
-
-				{Object.keys(info).map((key) => (
-					<InfoRow
-						key={key}
-						label={key}
-						value={info[key as keyof ProjectInfo]}
-					/>
-				))}
+				<InfoRow label="campo" value={work.category} />
+				<InfoRow label="cliente" value={work.client} />
+				<InfoRow label="tecnologia" value={work.technologies ?? []} />
 			</div>
         </div>
     );

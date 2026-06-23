@@ -3,12 +3,18 @@ import Layout from "@/layouts/layout.astro";
 import Content from "@/layouts/content.astro";
 import { Divider } from "@/components/ui/divider";
 import CursorBubble from "@/components/ui/cursorBubble";
-import { projects } from "@/data/projects";
+import { getWorks } from "@/lib/strapi/strapi";
+
+const works = await getWorks();
+const STRAPI_URL =
+  import.meta.env.PUBLIC_STRAPI_URL ??
+  import.meta.env.STRAPI_URL ??
+  "http://localhost:1337";
 ---
 
 <Layout>
   <Content
-    textExtra=`${projects.length} Proyectos`
+    textExtra=`${works.length} Proyectos`
     title="Nuestro trabajo"
     label="GALERIA"
   >
@@ -18,21 +24,21 @@ import { projects } from "@/data/projects";
       class="pt-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8"
     >
       {
-        projects.map((project) => (
-          <a href={`/works/${project.slug}`} class="block">
+        works.map((work) => (
+          <a href={`/works/${work.slug}`} class="block">
             <article class="flex flex-col gap-8">
               <img
-                src={project.image}
-                alt={project.title}
+                src={`${STRAPI_URL}${work.heroImage?.url}`}
+                alt={work.title}
                 loading="lazy"
                 class="w-full rounded-3xl object-cover aspect-4/3 md:aspect-16/10"
               />
               <div class="mt-4 flex items-center justify-between gap-4">
                 <h2 class="text-4xl lowercase font-medium leading-none">
-                  {project.title}
+                  {work.title}
                 </h2>
                 <span class="text-2xl font-medium opacity-50">
-                  {project.info.campo}
+                  {work.category}
                 </span>
               </div>
             </article>

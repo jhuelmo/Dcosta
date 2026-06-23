@@ -1,6 +1,5 @@
-import { projects } from "@/data/projects";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
 import { ChevronRight } from "lucide-react";
 import {
     Carousel,
@@ -9,10 +8,29 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "./ui/carousel";
+import { getWorks } from "@/lib/strapi/strapi";
+import type { Work } from "@/lib/strapi/types";
 
-const Works = () => {
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL;
+
+interface WorksProps {
+    title?: string;
+    ctaText?: string;
+    ctaUrl?: string;
+}
+
+const Works = ({
+    title = "Por qué confiar en nuestro laboratorio dental.",
+    ctaText = "Ver todos los trabajos",
+    ctaUrl = "/works",
+}: WorksProps) => {
+    const [works, setWorks] = useState<Work[]>([]);
     const sectionRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+
+    useEffect(() => {
+        getWorks().then(setWorks);
+    }, []);
 
     return (
         <section className="bg-[#f5f5f7] py-16 overflow-hidden">
@@ -25,16 +43,16 @@ const Works = () => {
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, ease: "easeOut" }}
                     >
-                        Por qué confiar en nuestro laboratorio dental.
+                        {title}
                     </motion.h2>
                     <motion.a
-                        href="/works"
+                        href={ctaUrl}
                         className="text-primary-light text-base hover:underline flex items-center gap-0.5 shrink-0 mb-1"
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : {}}
                         transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
                     >
-                        Ver todos los trabajos
+                        {ctaText}
                         <ChevronRight className="w-4 h-4" />
                     </motion.a>
                 </div>
@@ -48,52 +66,62 @@ const Works = () => {
                     }}
                 >
                     <CarouselContent className="-ml-6">
-                        {projects.map((project, index) => (
-                            <CarouselItem
-                                className="pl-6 basis-full sm:basis-[45%] lg:basis-[30%]"
-                                key={index}
-                            >
-                                <motion.div
-                                    initial={{ opacity: 0, y: 38 }}
-                                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                    transition={{
-                                        duration: 1,
-                                        delay: 0.15 + index * 0.18,
-                                        ease: "easeOut",
-                                    }}
+                        {works.map((work, index) => {
+                            const imgUrl = work.heroImage?.url
+                                ? `${STRAPI_URL}${work.heroImage.url}`
+                                : "";
+
+                            return (
+                                <CarouselItem
+                                    className="pl-6 basis-full sm:basis-[45%] lg:basis-[30%]"
+                                    key={work.documentId}
                                 >
-                                <a
-                                    href={`/works/${project.slug}`}
-                                    className="group relative block h-120 rounded-3xl overflow-hidden hover:scale-[1.02] transition-transform duration-800 ease-out"
-                                >
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        loading="lazy"
-                                        className="w-full h-full object-cover"
-                                    />
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 38 }}
+                                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                        transition={{
+                                            duration: 1,
+                                            delay: 0.15 + index * 0.18,
+                                            ease: "easeOut",
+                                        }}
+                                    >
+                                        <a
+                                            href={`/works/${work.slug}`}
+                                            className="group relative block h-120 rounded-3xl overflow-hidden hover:scale-[1.02] transition-transform duration-800 ease-out"
+                                        >
+                                            {imgUrl ? (
+                                                <img
+                                                    src={imgUrl}
+                                                    alt={work.title}
+                                                    loading="lazy"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-surface" />
+                                            )}
 
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/20 to-transparent" />
+                                            <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/20 to-transparent" />
 
-                                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                        <p className="text-sm text-white uppercase tracking-widest t mb-1">
-                                            {project.info.campo}
-                                        </p>
-                                        <h3 className="text-xl font-bold font-headings leading-snug">
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-sm text-white/80 mt-1">
-                                            {project.info.cliente}
-                                        </p>
-                                    </div>
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                                <p className="text-sm text-white uppercase tracking-widest mb-1">
+                                                    {work.category}
+                                                </p>
+                                                <h3 className="text-xl font-bold font-headings leading-snug">
+                                                    {work.title}
+                                                </h3>
+                                                <p className="text-sm text-white/80 mt-1">
+                                                    {work.client}
+                                                </p>
+                                            </div>
 
-                                    <button className="absolute bottom-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/30 group-hover:bg-white group-hover:text-primary transition-all duration-300">
-                                        <ChevronRight className="w-5 h-5" />
-                                    </button>
-                                </a>
-                                </motion.div>
-                            </CarouselItem>
-                        ))}
+                                            <button className="absolute bottom-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/30 group-hover:bg-white group-hover:text-primary transition-all duration-300">
+                                                <ChevronRight className="w-5 h-5" />
+                                            </button>
+                                        </a>
+                                    </motion.div>
+                                </CarouselItem>
+                            );
+                        })}
                     </CarouselContent>
 
                     <div className="mt-6 flex justify-end gap-2">

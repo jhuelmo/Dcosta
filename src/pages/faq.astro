@@ -1,10 +1,10 @@
 ---
 import DocPage from "@/layouts/docPage.astro";
 import DocSection from "@/components/docSection.astro";
-import { getLegal } from "@/lib/strapi/strapi";
+import { getFaq } from "@/lib/strapi/strapi";
 import { toParagraphs } from "@/lib/utils";
 
-const data = await getLegal();
+const data = await getFaq();
 const tocItems = data.sections.map(({ sectionID, title }) => ({
   id: sectionID,
   label: title,
