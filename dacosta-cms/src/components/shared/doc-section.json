@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_doc_sections",
+  "info": {
+    "displayName": "Doc Section"
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "text",
+      "required": true
+    }
+  },
+  "config": {}
+}

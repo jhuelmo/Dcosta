@@ -1,17 +1,13 @@
 ---
 import DocPage from "@/layouts/docPage.astro";
 import DocSection from "@/components/docSection.astro";
-import { getLegal } from "@/lib/strapi/strapi";
+import { getCookie } from "@/lib/strapi/strapi";
 import { toParagraphs } from "@/lib/utils";
 
-const data = await getLegal();
-const tocItems = data.sections.map(({ sectionID, title }) => ({
-  id: sectionID,
-  label: title,
-}));
+const data = await getCookie();
 ---
 
-<DocPage title={data.title} intro={data.intro} heading={data.heading} tocItems={tocItems}>
+<DocPage title={data.title} intro={data.intro} heading={data.heading}>
   {data.sections.map((section) => (
     <DocSection id={section.sectionID} title={section.title}>
       {toParagraphs(section.content).map((text) => (

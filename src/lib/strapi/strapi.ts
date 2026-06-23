@@ -1,5 +1,5 @@
 import qs from 'qs';
-import type { GlobalData, HomeData, Service } from './types';
+import type { GlobalData, HomeData, Service, Work, DocPageData } from './types';
 
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL ?? import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
 const STRAPI_TOKEN = import.meta.env.STRAPI_TOKEN;
@@ -17,6 +17,9 @@ const QUERY_HOME_PAGE ={
       populate: '*',
     },
     triad: {
+      populate: '*',
+    },
+    works: {
       populate: '*',
     }
   },
@@ -47,6 +50,25 @@ export const QUERY_SERVICES = {
           },
         },
       },
+    },
+  },
+};
+
+export const QUERY_WORKS = {
+  populate: {
+    heroImage: {
+      populate: "*",
+    },
+    gallery: {
+      populate: "*",
+    },
+  },
+};
+
+export const QUERY_DOC_PAGE = {
+  populate: {
+    sections: {
+      populate: "*",
     },
   },
 };
@@ -93,4 +115,36 @@ export async function getServiceBySlug(slug: string): Promise<Service> {
   const res = await fetch(`${STRAPI_URL}/api/services?${query}`, { headers: authHeaders });
   const { data } = await res.json();
   return { ...data[0] };
+}
+
+export async function getWorks(): Promise<Work[]> {
+  const query = qs.stringify(QUERY_WORKS);
+  const res = await fetch(`${STRAPI_URL}/api/works?${query}`, { headers: authHeaders });
+  const { data } = await res.json();
+  return (data ?? []).map((item: any) => ({ ...item }));
+}
+
+export async function getWorkBySlug(slug: string): Promise<Work> {
+  const query = qs.stringify({
+    ...QUERY_WORKS,
+    filters: { slug: { $eq: slug } },
+  });
+  const res = await fetch(`${STRAPI_URL}/api/works?${query}`, { headers: authHeaders });
+  const { data } = await res.json();
+  return { ...data[0] };
+}
+
+export async function getLegal(): Promise<DocPageData> {
+  const query = qs.stringify(QUERY_DOC_PAGE);
+  return getStrapiData<DocPageData>(`/api/legal?${query}`);
+}
+
+export async function getFaq(): Promise<DocPageData> {
+  const query = qs.stringify(QUERY_DOC_PAGE);
+  return getStrapiData<DocPageData>(`/api/faq?${query}`);
+}
+
+export async function getCookie(): Promise<DocPageData> {
+  const query = qs.stringify(QUERY_DOC_PAGE);
+  return getStrapiData<DocPageData>(`/api/cookie?${query}`);
 }

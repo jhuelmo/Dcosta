@@ -3,13 +3,15 @@ import Layout from "@/layouts/layout.astro";
 import Content from "@/layouts/content.astro";
 import CursorBubble from "@/components/ui/cursorBubble";
 import { Projects } from "@/components/layouts/Gallery/Projects";
-import { projects } from "@/data/projects";
+import { getWorks } from "@/lib/strapi/strapi";
+
+const works = await getWorks();
 ---
 
 <Layout>
   <Content title="Nuestro trabajo" label="GALERIA" type="center">
     <div class="mt-8 pt-8 grid grid-cols-1 gap-26" data-hover>
-      <Projects client:load projects={projects} />
+      <Projects client:load works={works} />
     </div>
     <CursorBubble selector="[data-hover]" client:load />
   </Content>

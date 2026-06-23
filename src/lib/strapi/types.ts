@@ -41,6 +41,22 @@ export interface Service {
 
 /////////////////
 
+// WORKS
+
+export interface Work {
+  documentId: string;
+  slug: string;
+  title: string;
+  category: string;
+  client: string;
+  technologies: string[];
+  description: string;
+  heroImage: StrapiImage;
+  gallery: StrapiImage[];
+}
+
+/////////////////
+
 export interface SeoData {
   metaTitle: string;
   metaDescription: string;
@@ -65,14 +81,39 @@ export interface TriadData{
   triad3: string;
 }
 
+export interface WorksSectionData {
+  title: string;
+  ctaText: string;
+  ctaUrl: string;
+}
+
 export interface HomeData {
   hero: HeroData;
   seo: SeoData;
   triad: TriadData;
+  works: WorksSectionData;
 }
 
 
 export interface GlobalData {
   seo: SeoData;
+}
+
+/////////////////
+
+// DOC PAGES (legal, faq, cookies)
+
+export interface DocSectionData {
+  sectionID: string;
+  title: string;
+  /** Texto plano; los párrafos se separan con una línea en blanco */
+  content: string;
+}
+
+export interface DocPageData {
+  title: string;
+  intro: string;
+  heading: string;
+  sections: DocSectionData[];
 }
 

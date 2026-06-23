@@ -25,6 +25,11 @@
       "type": "component",
       "component": "sections.triad",
       "repeatable": false
+    },
+    "works": {
+      "type": "component",
+      "component": "sections.works",
+      "repeatable": false
     }
   }
 }

@@ -9,7 +9,7 @@ import Main from '@/layouts/main.astro';
 import { getHome } from '@/lib/strapi/strapi';
 import type { HomeData } from '@/lib/strapi/types';
 
-const {seo, hero, triad} : HomeData = await getHome();
+const {seo, hero, triad, works} : HomeData = await getHome();
 
 ---
 
@@ -23,8 +23,13 @@ const {seo, hero, triad} : HomeData = await getHome();
 			imageUrl={hero.image?.url}
 		/>
 		<Triad {...triad} client:load />
-		<Works client:load/>
-		<!-- <Ticker client:load /> -->
+		<Works
+			title={works.title}
+			ctaText={works.ctaText}
+			ctaUrl={works.ctaUrl}
+			client:load
+		/>
+		 <!-- <Ticker client:load />  -->
 		<Services client:load />
 	</Main>
 </Layout>
