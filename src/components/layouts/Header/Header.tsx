@@ -15,8 +15,7 @@ const navLinks = [
     { label: "Servicios", href: "/services" },
     { label: "Tecnología", href: "/tecnology" },
     { label: "Equipo", href: "/team" },
-    { label: "Galeria", href: "/gallery" },
-    { label: "Galeria2", href: "/gallery2" },
+    { label: "Galeria", href: "/gallery2" },
 ];
 
 export function Header(_: { variant?: "default" }) {
