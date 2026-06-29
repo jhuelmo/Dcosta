@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-    motion,
-    useMotionValueEvent,
-    useScroll,
-    AnimatePresence,
-    type Variants,
-} from "motion/react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 import { HeaderLink } from "./HeaderLink";
 import { Button } from "@/components/ui/button";
 import logoUrl from "@/assets/logo-placeholder.png";
@@ -20,7 +14,6 @@ const navLinks = [
 
 export function Header(_: { variant?: "default" }) {
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [collapsed, setCollapsed] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -45,6 +38,8 @@ export function Header(_: { variant?: "default" }) {
             width: isMobile ? "calc(100vw - 2rem)" : "1280px",
             y: 0,
             x: "-50%",
+            backgroundColor: "rgba(255, 255, 255, 0.72)",
+            backdropFilter: "blur(20px)",
             transition: {
                 opacity: { duration: 0.5, ease: "easeOut" },
                 scale: isMobile ? { duration: 0 } : { type: "spring", stiffness: 180, damping: 22 },
@@ -55,20 +50,6 @@ export function Header(_: { variant?: "default" }) {
                 delayChildren: 0.9,
             },
         },
-        collapsed: {
-            opacity: 1,
-            scale: 1,
-            width: isMobile ? "calc(100vw - 2rem)" : "46vw",
-            y: 0,
-            x: "-50%",
-            backgroundColor: "rgba(255, 255, 255, 0.72)",
-            backdropFilter: "blur(20px)",
-            transition: {
-                type: "spring",
-                stiffness: 220,
-                damping: 30,
-            },
-        },
     };
 
     const navVariants: Variants = {
@@ -76,10 +57,6 @@ export function Header(_: { variant?: "default" }) {
         visible: {
             opacity: 1,
             transition: { staggerChildren: 0.07, delayChildren: 0.15 },
-        },
-        collapsed: {
-            opacity: 1,
-            transition: { staggerChildren: 0.04 },
         },
     };
 
@@ -90,7 +67,6 @@ export function Header(_: { variant?: "default" }) {
             y: 0,
             transition: { type: "spring", stiffness: 320, damping: 26 },
         },
-        collapsed: { opacity: 1, y: 0 },
     };
 
     const mobileMenuVariants: Variants = {
@@ -123,28 +99,18 @@ export function Header(_: { variant?: "default" }) {
         },
     };
 
-    const { scrollY } = useScroll();
-
     useEffect(() => {
         const timeout = setTimeout(() => setHasLoaded(true), 1800);
         return () => clearTimeout(timeout);
     }, []);
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        setCollapsed(latest >= 800);
-    });
-
-    useEffect(() => {
-        if (collapsed) setMenuOpen(false);
-    }, [collapsed]);
-
     return (
         <>
             <motion.header
                 initial="hidden"
-                animate={collapsed ? "collapsed" : "visible"}
+                animate="visible"
                 variants={headerVariants}
-                className="header fixed left-1/2 top-6 z-999 flex h-16 items-center justify-between rounded-full bg-neutral p-2 shadow-md shadow-black/10 max-w-[calc(100vw-5rem)]"
+                className="header fixed left-1/2 top-6 z-999 flex h-16 items-center justify-between rounded-full p-2 shadow-md shadow-black/10 max-w-[calc(100vw-5rem)]"
             >
                 <motion.a className="logo ml-2 h-auto w-32 shrink-0" href="/">
                     <img
