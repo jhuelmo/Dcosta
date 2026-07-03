@@ -55,33 +55,33 @@ export default function ServicePageCard({
   
   return (
     <motion.div
-      className="flex items-center gap-6 bg-white rounded-2xl p-6 shadow-xs"
+      className="flex flex-col gap-6 lg:flex-row lg:items-center bg-white rounded-2xl p-5 lg:p-6 shadow-xs"
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="flex flex-1 flex-col min-w-[180px] gap-10">
+      <div className="flex lg:flex-1 flex-col gap-6 lg:gap-10">
         <div className="flex items-start gap-3">
-          <motion.div 
+          <motion.div
             variants={iconVariants}
             transition={{
-              duration: 0.5, 
-              delay: 0.15, 
-              ease: [0.22, 1, 0.36, 1] 
+              duration: 0.5,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1]
             }}
           >
-            <Icon className="w-12 h-12 text-gray-700 shrink-0" strokeWidth={1.5} />
+            <Icon className="w-10 h-10 lg:w-12 lg:h-12 text-gray-700 shrink-0" strokeWidth={1.5} />
           </motion.div>
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-6 lg:gap-10 min-w-0">
             <motion.h3
-              className="text-4xl text-gray-900 whitespace-nowrap"
+              className="text-2xl lg:text-4xl text-gray-900"
               variants={titleVariants}
               transition={{
-                duration: 0.5, 
-                delay: 0.25, 
-                ease: [0.22, 1, 0.36, 1] 
+                duration: 0.5,
+                delay: 0.25,
+                ease: [0.22, 1, 0.36, 1]
               }}
             >
               {title}
@@ -106,20 +106,20 @@ export default function ServicePageCard({
           </div>
         </div>
       </div>
-      <div className="flex flex-1 gap-4 items-center flex-row justify-between">
+      <div className="flex lg:flex-1 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <motion.p
-          className="flex-1 text-xl text-gray-500 max-w-[50%] leading-relaxed"
+          className="flex-1 text-base lg:text-xl text-gray-500 lg:max-w-[50%] leading-relaxed"
           variants={descVariants}
           transition={{
-            duration: 0.6, 
-            delay: 0.3, 
-            ease: "easeOut" 
+            duration: 0.6,
+            delay: 0.3,
+            ease: "easeOut"
           }}
         >
           {description}
         </motion.p>
         <motion.div
-          className="w-48 h-48 rounded-xl overflow-hidden shrink-0"
+          className="w-full aspect-video sm:w-48 sm:h-48 sm:aspect-auto rounded-xl overflow-hidden shrink-0"
           variants={imageVariants}
           transition={{
             duration: 0.6,
