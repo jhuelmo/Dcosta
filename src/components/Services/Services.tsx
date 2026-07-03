@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useMotionTemplate, type MotionValue } 
 import { getServices } from "@/lib/strapi/strapi.ts";
 import type { Service } from "@/lib/strapi/types.ts";
 import { LetterButton } from "../ui/button";
+import labBg from "@/assets/labBg.png";
 
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL;
 
@@ -60,7 +61,7 @@ const AnimatedCard = ({ service, index, total, scrollYProgress }: CardProps) => 
 
     return (
         <motion.div
-            className="absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-[80%] lg:w-[70%]"
+            className="absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] lg:w-[70%]"
             style={{
                 y,
                 scale,
@@ -75,8 +76,8 @@ const AnimatedCard = ({ service, index, total, scrollYProgress }: CardProps) => 
                 className="group flex h-full w-full overflow-hidden rounded-3xl bg-white"
             >
                 {/* Texto */}
-                <div className="flex flex-col justify-between px-10 py-10 lg:px-16 lg:py-14 w-full lg:w-[42%] shrink-0">
-                    <span className="text-xs font-semibold text-[#6e6e73] uppercase tracking-[0.2em]">
+                <div className="flex flex-col justify-between px-6 py-8 lg:px-16 lg:py-14 w-full lg:w-[42%] shrink-0">
+                    <span className="text-xs font-semibold text-muted uppercase tracking-[0.2em]">
                         {String(index + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(total).padStart(2, "0")}
                     </span>
 
@@ -89,7 +90,7 @@ const AnimatedCard = ({ service, index, total, scrollYProgress }: CardProps) => 
                         <h3 className="text-3xl lg:text-4xl font-bold font-headings text-primary leading-tight">
                             {service.title}
                         </h3>
-                        <p className="text-sm text-[#6e6e73] leading-relaxed line-clamp-4">
+                        <p className="text-sm text-muted leading-relaxed line-clamp-4">
                             {service.description}
                         </p>
                     </div>
@@ -149,16 +150,18 @@ const Services = () => {
                     {/* Fondo con blur */}
                     <div className="absolute inset-0 scale-110">
                         <img
-                            src="/src/assets/labBg.png"
+                            src={labBg.src}
                             alt=""
                             className="w-full h-full object-cover blur-lg"
                         />
                         <div className="absolute inset-0 bg-primary/50" />
                     </div>
 
-                    {/* Hero text — z-10, sale hacia arriba al scrollear */}
+                    {/* Hero text — z-10, sale hacia arriba al scrollear.
+                        h-full + justify-center lo centra en cualquier viewport
+                        (el pt fijo desbordaba en pantallas bajas) */}
                     <motion.div
-                        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center text-center px-6 pt-70 pb-8 gap-4 "
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 gap-4"
                         style={{ y: heroY }}
                     >
                         <h2 className="text-5xl lg:text-7xl font-headings text-white leading-tight">

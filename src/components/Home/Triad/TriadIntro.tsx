@@ -7,7 +7,7 @@ import {
 } from "motion/react";
 import { FloatingImage } from "./FloatingImage";
 import { useRef } from "react";
-import { StickyBlock } from "../ui/stickyBlock";
+import { StickyBlock } from "../../ui/stickyBlock";
 
 interface TriadIntroProps {
     text: string;

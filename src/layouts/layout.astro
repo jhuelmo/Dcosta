@@ -1,17 +1,18 @@
 ---
-import Head from "@/components/Head.astro";
-import SmoothScroll from "@/components/SmoothScroll.tsx";
-import { getGlobal } from "@/lib/strapi/strapi";
+import Head from "@/components/layouts/Head.astro";
+import SmoothScroll from "@/components/layouts/SmoothScroll";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { title = "Default Title", description = "Default Description" } : Props = Astro.props;
-
-
+const {
+  title = "D'acosta Labs — Laboratorio dental",
+  description = "Laboratorio de prótesis dental digital. Precisión CAD/CAM y acabado artesanal.",
+}: Props = Astro.props;
 ---
+
 <!doctype html>
 <html lang="es">
 	<Head title={title} description={description} />

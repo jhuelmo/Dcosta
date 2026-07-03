@@ -1,11 +1,11 @@
 ---
 import Content from "@/layouts/content.astro";
 import Layout from "@/layouts/layout.astro";
-
+import Team from "@/components/Team/Team";
 ---
 
 <Layout>
     <Content title="Quien lo hace?" label="EQUIPO">
-        
+        <Team client:load />
     </Content>
 </Layout>

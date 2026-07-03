@@ -1,7 +1,8 @@
 ---
-import InfoLayout from "@/layouts/infoLayout.astro";
 import Layout from "@/layouts/layout.astro";
-import { TableOfContents, type TocItem } from "@/components/tableOfContents";
+import { Footer } from "@/components/layouts/Footer/Footer";
+import { Header } from "@/components/layouts/Header/Header";
+import { TableOfContents, type TocItem } from "@/components/Docs/TableOfContents";
 
 interface Props {
   title: string;
@@ -14,22 +15,23 @@ interface Props {
 const { title, intro, heading, tocItems } = Astro.props;
 ---
 
-<Layout>
-	<InfoLayout>
+<Layout title={title}>
+	<div class="bg-primary py-4">
+		<Header client:load />
 		<main class="bg-primary text-primary-foreground">
-			<section class="">
-				<div class="max-w-360 mx-auto px-12">
-					<div class="flex items-end justify-between h-[65vh] pb-15">
-						<h1 class="main-title font-headings text-left w-3xl">
+			<section>
+				<div class="max-w-360 mx-auto px-6 lg:px-12">
+					<div class="flex flex-col justify-end gap-6 pt-40 pb-15 lg:h-[65vh] lg:flex-row lg:items-end lg:justify-between lg:pt-0">
+						<h1 class="main-title font-headings text-left lg:max-w-3xl">
 							{title}
 						</h1>
-						<p class="text-2xl font-bold leading-relaxed text-right w-lg text-primary-foreground/90 lg:justify-self-end">
+						<p class="text-xl lg:text-2xl font-bold leading-relaxed lg:text-right lg:max-w-lg text-primary-foreground/90">
 							{intro}
 						</p>
 					</div>
 				</div>
 
-				<div class="bg-neutral text-textColor m-4 rounded-3xl">
+				<div class="bg-neutral text-textColor m-2 lg:m-4 rounded-3xl">
 					<div class="max-w-360 mx-auto px-6 lg:px-12">
 						{/*
 						 * 3 columnas: [gutter izq][columna de lectura centrada][gutter der]
@@ -41,7 +43,7 @@ const { title, intro, heading, tocItems } = Astro.props;
 						 * coloque el menú junto al título en la misma fila.
 						 */}
 						<div class="grid lg:grid-cols-[1fr_min(48rem,100%)_1fr] gap-y-10 lg:gap-x-16">
-							<h2 class="lg:col-start-2 lg:row-start-1 text-5xl md:text-7xl font-headings font-bold pt-30 pb-12">
+							<h2 class="lg:col-start-2 lg:row-start-1 text-5xl md:text-7xl font-headings font-bold pt-16 lg:pt-30 pb-6 lg:pb-12">
 								{heading}
 							</h2>
 
@@ -59,5 +61,6 @@ const { title, intro, heading, tocItems } = Astro.props;
 				</div>
 			</section>
 		</main>
-	</InfoLayout>
+	</div>
+	<Footer />
 </Layout>

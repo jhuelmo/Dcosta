@@ -6,13 +6,12 @@ import {
 } from "motion/react";
 import { TriadElement } from "./TriadElement";
 import { TriadIntro } from "./TriadIntro";
-import { StickyBlock } from "../ui/stickyBlock";
+import { StickyBlock } from "../../ui/stickyBlock";
 import type { TriadData } from "@/lib/strapi/types";
 
 const Triad = ({slogan, triad1, triad2, triad3}: TriadData) => {
     const ref = useRef(null);
 
-    console.log("TRIAD: ", {slogan, triad1, triad2, triad3});
 
 
     const { scrollYProgress } = useScroll({
