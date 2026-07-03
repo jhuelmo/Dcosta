@@ -27,3 +27,6 @@ pnpm-debug.log*
 # npm lock file (this project uses pnpm)
 package-lock.json
 .env*
+
+# knowledge graph cache (generado localmente)
+graphify-out/
