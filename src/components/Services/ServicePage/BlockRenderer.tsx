@@ -2,7 +2,7 @@
 import ImageBlock from "./ImageBlock";
 import Gallery from "./Gallery";
 import type { Block } from "@/lib/strapi/types";
-import RichText from "./RickText";
+import RichText from "./RichText";
 
 interface Props {
   blocks: Block[];

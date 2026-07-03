@@ -7,7 +7,7 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from "./ui/carousel";
+} from "../ui/carousel";
 import { getWorks } from "@/lib/strapi/strapi";
 import type { Work } from "@/lib/strapi/types";
 
@@ -33,7 +33,7 @@ const Works = ({
     }, []);
 
     return (
-        <section className="bg-[#f5f5f7] py-16 overflow-hidden">
+        <section className="bg-surface-light py-16 overflow-hidden">
             <div ref={sectionRef} className="container-xl px-4 lg:px-8">
                 {/* Header */}
                 <div className="flex flex-col items-start md:flex-row md:items-end justify-between mb-8">
@@ -125,8 +125,8 @@ const Works = ({
                     </CarouselContent>
 
                     <div className="mt-6 flex justify-end gap-2">
-                        <CarouselPrevious className="static! translate-x-0! translate-y-0! w-9 h-9 rounded-full border border-[#d2d2d7] bg-white text-[#1d1d1f] hover:bg-[#e8e8ed]" />
-                        <CarouselNext className="static! translate-x-0! translate-y-0! w-9 h-9 rounded-full border border-[#d2d2d7] bg-white text-[#1d1d1f] hover:bg-[#e8e8ed]" />
+                        <CarouselPrevious className="static! translate-x-0! translate-y-0! w-9 h-9 rounded-full border border-surface bg-white text-neutral-dark hover:bg-surface" />
+                        <CarouselNext className="static! translate-x-0! translate-y-0! w-9 h-9 rounded-full border border-surface bg-white text-neutral-dark hover:bg-surface" />
                     </div>
                 </Carousel>
             </div>

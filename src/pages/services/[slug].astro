@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/layout.astro";
-import { services } from "@/components/Services/servicesData";
 import Main from "@/layouts/main.astro";
 import ServiceHero from "@/components/Services/ServicePage/ServiceHero";
 import { getServices } from "@/lib/strapi/strapi";
@@ -15,7 +14,8 @@ export async function getStaticPaths() {
 }
 
 const { service } = Astro.props;
-const STRAPI_URL = import.meta.env.STRAPI_URL;
+const STRAPI_URL =
+  import.meta.env.PUBLIC_STRAPI_URL ?? import.meta.env.STRAPI_URL;
 ---
 
 <Layout>
