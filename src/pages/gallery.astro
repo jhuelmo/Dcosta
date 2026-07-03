@@ -1,50 +1,25 @@
 ---
 import Layout from "@/layouts/layout.astro";
 import Content from "@/layouts/content.astro";
-import { Divider } from "@/components/ui/divider";
 import CursorBubble from "@/components/ui/cursorBubble";
+import { Projects } from "@/components/Gallery/Projects";
 import { getWorks } from "@/lib/strapi/strapi";
 
 const works = await getWorks();
-const STRAPI_URL =
-  import.meta.env.PUBLIC_STRAPI_URL ??
-  import.meta.env.STRAPI_URL ??
-  "http://localhost:1337";
 ---
 
-<Layout>
+<Layout
+  title="Galería — D'acosta Labs"
+  description="Casos reales de nuestro laboratorio dental: coronas, implantes y prótesis fabricadas con flujo digital y acabado artesanal."
+>
   <Content
-    textExtra=`${works.length} Proyectos`
     title="Nuestro trabajo"
     label="GALERIA"
+    type="center"
+    textExtra={`${works.length} Proyectos`}
   >
-    <Divider />
-    <div
-      data-hover
-      class="pt-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8"
-    >
-      {
-        works.map((work) => (
-          <a href={`/works/${work.slug}`} class="block">
-            <article class="flex flex-col gap-8">
-              <img
-                src={`${STRAPI_URL}${work.heroImage?.url}`}
-                alt={work.title}
-                loading="lazy"
-                class="w-full rounded-3xl object-cover aspect-4/3 md:aspect-16/10"
-              />
-              <div class="mt-4 flex items-center justify-between gap-4">
-                <h2 class="text-4xl lowercase font-medium leading-none">
-                  {work.title}
-                </h2>
-                <span class="text-2xl font-medium opacity-50">
-                  {work.category}
-                </span>
-              </div>
-            </article>
-          </a>
-        ))
-      }
+    <div class="mt-8 pt-8" data-hover>
+      <Projects client:load works={works} />
     </div>
     <CursorBubble selector="[data-hover]" client:load />
   </Content>

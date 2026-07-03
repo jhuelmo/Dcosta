@@ -5,12 +5,25 @@ interface CursorBubbleProps {
   selector?: string;
   offsetX?: number;
   offsetY?: number;
+  /** Texto dentro de la burbuja */
+  label?: string;
 }
 
-const CursorBubble: React.FC<CursorBubbleProps> = ({ selector, offsetX = 15, offsetY = 15 }) => {
+const CursorBubble: React.FC<CursorBubbleProps> = ({
+	selector,
+	offsetX = 15,
+	offsetY = 15,
+	label = "ver proyecto",
+}) => {
 
 	const [element, setElement] = useState<HTMLElement | null>(null);
 	const [isHovering, setIsHovering] = useState(false);
+	// Solo tiene sentido con puntero fino (ratón/trackpad); en táctil no se monta
+	const [hasFinePointer, setHasFinePointer] = useState(false);
+
+	useEffect(() => {
+		setHasFinePointer(window.matchMedia("(pointer: fine)").matches);
+	}, []);
 	const mouseX = useMotionValue(0);
 	const mouseY = useMotionValue(0);
 
@@ -84,6 +97,8 @@ const CursorBubble: React.FC<CursorBubbleProps> = ({ selector, offsetX = 15, off
 	}, [element, handleMouseEnter, handleMouseLeave]);
 	
 
+  if (!hasFinePointer) return null;
+
   return (
     <motion.div
       className="cursor-bubble"
@@ -96,7 +111,7 @@ const CursorBubble: React.FC<CursorBubbleProps> = ({ selector, offsetX = 15, off
 		pointerEvents: 'none',
       }}
     >
-      ver proyecto
+      {label}
     </motion.div>
   );
 };
